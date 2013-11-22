@@ -28,7 +28,7 @@ fi
 
 # create chapters include
 log "Create chapters include"
-ls $CHAPTERS_DIR/*.tex | awk '{ printf "\\input{%s}\n", $1}' > $TEMP_DIR/chapters.tex
+ls $CHAPTERS_DIR/*.tex | sort -V | awk '{ printf "\\input{%s}\n", $1}' > $TEMP_DIR/chapters.tex
 
 log "Create pdf from latex"
 pdflatex --halt-on-error --output-directory="$OUTPUT_DIR" document.tex > /dev/null
