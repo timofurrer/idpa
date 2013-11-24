@@ -1,19 +1,28 @@
-\documentclass{article}
+\documentclass[12pt,a4paper,titlepage]{report}
 
 % include pacakges
 \usepackage[top=2cm, left=2.5cm, right=2.5cm, includefoot]{geometry}
+\usepackage{enumerate}
 
 \begin{document}
 
 \title{IDPA template draft}
-\author{Graf Dimitri und Furrer Timo}
-
+\author{Graf Dimitri und Furrer Timo\\
+  Inf4A\\
+  Jutta Luecking\\
+  Interdisziplinäre Projektarbeit\\
+  GIBZ Zug}
+\date{April 2014}
 \maketitle
+
+\tableofcontents
+\newpage
 
 \begin{abstract}
 The abstract text goes here.
+
 \end{abstract}
 
-\input{$TEMP_DIR/chapters.tex}
+\input{chapters/02_cloud_computing.tex}
 
 \end{document}
