@@ -24,6 +24,8 @@ fi
 
 if [[ ! -d "$OUTPUT_DIR" ]]; then
   mkdir "$OUTPUT_DIR"
+else
+  rm -rf "$OUTPUT_DIR/*"
 fi
 
 # create sections include

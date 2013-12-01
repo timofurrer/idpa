@@ -1,1 +1,5 @@
+# output files
 output
+
+# log files from pdflatex
+*.log
