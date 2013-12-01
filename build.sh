@@ -11,7 +11,7 @@ log_error()
 }
 
 
-CHAPTERS_DIR=chapters
+SECTIONS_DIR=sections
 OUTPUT_DIR=output
 TEMP_DIR=build_tmp
 
@@ -26,9 +26,9 @@ if [[ ! -d "$OUTPUT_DIR" ]]; then
   mkdir "$OUTPUT_DIR"
 fi
 
-# create chapters include
-log "Create chapters include"
-ls $CHAPTERS_DIR/*.tex | sort -V | awk '{ printf "\\input{%s}\n", $1}' > $TEMP_DIR/chapters.tex
+# create sections include
+log "Create sections include"
+ls $SECTIONS_DIR/*.tex | sort -V | awk '{ printf "\\input{%s}\n", $1}' > $TEMP_DIR/sections.tex
 
 log "Create pdf from latex"
 pdflatex --halt-on-error --output-directory="$OUTPUT_DIR" document.tex > /dev/null
