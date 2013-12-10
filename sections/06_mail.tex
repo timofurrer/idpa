@@ -1,0 +1,42 @@
+\newpage
+\section{E-Mails und deren Tücken}
+Täglich werden heute bis zu 180 Milliarden E-Mails pro Tag versendet. Eine gewaltige Menge, wenn man bedenkt, dass es ein wenig mehr als sieben Milliarden Menschen auf diesem Planet gibt.
+Doch nur wenige E-Mail Nutzer machen sich Gedanken darüber, was denn eigentlich hinter einer E-Mail steckt. Wohin geht sie genau? Wer alles kann diese E-Mail theoretisch lesen? Wo wird diese Nachricht, wenn ich sie mal versendet habe, überall gespeichert? Und für wie lange? Gibt es Kopien? Backups? Auf anderen Servern? Von vielleicht sogar bei anderen Firmen als mein E-Mail Provider?
+All diese Frage sind sehr wichtig, wenn man vertrauliche Daten per Mail versendet. Aber nicht nur dann, denn selbst wenn die Nachricht nicht von grosser Bedeutung ist, so möchte man doch eine gewisse Privatsphäre wahren.
+Was kann man also als „0815“ Privatbenutzer einer E-Mail Adresse tun um seine eigenen Mails möglichst sicher zu versenden, zu speichern und  zu empfangen?
+Im nächsten Kapitel wird versucht auf alle diese Fragen eine Antwort zu finden. Zuerst einmal muss man aber verstehen, wie das genau funktioniert, mit den „Mails“.
+
+\subsection{Funktionsweise des Mailverkehrs}
+Das Erste was wir wohl tun werden, nach dem wir den Entschluss gefällt haben eine E-Mail versenden zu wollen, ist es unseren Computer zu starten und unseren E-Mail Client aufzumachen. Ein solcher Client kann etwa Mozilla Thunderbird, Apple Mail oder Microsoft Outlook sein. Traditionellerweise gehen wir davon aus, dass unser Client mindestens mit den Funktionen um eine E-Mail zu versenden und zu empfangen ausgestattet ist.
+Wir haben nun unsere E-Mail verfasst und drücken in unserem Client auf den „Senden“ Knopf. Was passiert nun mit der Mail?
+Diese wird, sofern natürlich eine Verbindung ins Internet besteht, zum konfigurierten SMTP-Server gesendet. Ein SMTP-Server ist ein Computer im Internet, der die Aufgabe hat eine E-Mail zum Empfänger zu transportieren. Man nennt einen solchen Server deshalb „Mail Transport Agent“ kurz MTA. Sobald dieser Server den Empfänger ausfindig machen konnte, wird die E-Mail an den MTA des Empfängers weitergeleitet. Dort angekomment legt dieser MTA die E-Mail beim „Mail Delivery Agent“ kurz MDA des Empfängers ab.
+Auf der anderen Seite gibt es nun natürlich auch den Empfänger, welcher auch einen Computer mit E-Mail Client hat und gerne die Nachricht, die wir ihm anfangs zukommen lassen hatten, lesen möchte. Wie schon erwähnt hat so ein „traditioneller“ Client auch die Funktion Mails empfangen zu können. Dazu wird analog zum SMTP-Server des Senders auch ein Server konfiguriert um Mails von seinem Postfach abrufen zu können. Dieser Server, der die Funktion der MDA hat, nennt man POP- oder IMAP-Server. Zwischen diesen beiden Arten von Mail Delivery Agents gibt es einen grossen und nützlichen Unterschied, denn im Gegensatz zum POP-Server kann der IMAP-Server die Mails zwischen mehreren Clients synchronisieren, dazu gehört etwa ein Status, ob die Mail schon gelesen oder als wichtig markiert wurde. So wird natürlich beim IMAP-Server auch immer, aus Synchronisationsgründen, eine Kopie der Nachricht auf dem Server belassen, wohingegen diese Option bei einem POP-Server nicht gesetzt sein muss.
+So will nun also unser Empfänger die Mails seines Postfachs lesen. Dazu verbindet sich, wie schon gesagt, der E-Mail Client mit dem konfigurieren MDA. Dieser MDA kann nun die Nachricht, die er vom Transport Agent bekommen hat dem Empfänger zurückschicken.
+\footnote{\url{http://de.wikipedia.org/wiki/Mail_Delivery_Agent}}
+\footnote{\url{http://de.wikipedia.org/wiki/Mail_Transport_Agent}}
+\\
+
+\begin{figure}
+\centering
+\noindent\includegraphics[scale=0.14]{images/mailverkehr.jpg}
+\caption{Funktionsweise Mailverkehr}
+\end{figure}
+
+
+\subsection{Mein Provider und seine Server}
+Die erste Entscheidung, die man treffen muss, um überhaupt eine E-Mail senden zu können, noch bevor man überhautp seinen Mail-Client startet, ist es, sich einen passenden Provider auszusuchen. Ein Provider ist meist eine Firma, die seinen Kunden eine Mail Adresse zur Verfügung stellt. Dies kann z.B. Google mit Gmail, Microsoft mit Hotmail oder eine Firma wie GMX sein. Was ein solcher Provider also tut, ist es irgendwo eine E-Mail Adresse für den Kunden zu konfigurieren. Dazu gehört einmal eine Adresse zum Mail Transport Agent und eine Adresse zum Mail Delivery Agent Server.
+Diese beiden Server sind nicht nur auf den Bezug für die Mailfunktionalität im allgemeinen von Bedeutung. Nein, denn dort, auf diesen Servern, unter der Kontrolle des jeweiligen Providers, geht jede einzelne E-Mail, die versendet oder empfangen wird durch. Was bedeutet, dass dort theoretisch ein Mitschnitt aller Nachrichten gemacht werden kann. Auch macht der Provider, natürlich nur zum besten seiner Kunden, Backup deren Postfächer, auf dem MDA. Das mag ja schön und gut sein, aber wer, ausser meinerselbst kann auch noch auf dieses Postfach oder die Backup-Daten zugreifen? Die Systemadministratoren vom Provider? PR-Firmen? Datenanalysten? Geheimdienste? Wer weiss …
+Wie man sehen kann, hat man, abgesehen vom Vertrauen, im Prinzip keine Ahnung, wer alles auf seine E-Mails zugreifen kann.
+\subsection{E-Mails verschlüsseln}
+Doch es gibt ein paar Dinge, die man als E-Mail Nutzer tun kann, um seine Post einigermassen vor ungewollten Blicken schützen zu können.
+So gibt es mehrere Verfahren um E-Mails zu verschlüsseln. Eines der beliebtesten und wohl meist verbreitesten ist PGP (Pretty Good Privacy) oder deren Weiterentwicklung GPG (GNU Privacy Guard).
+Bei beiden handelt es sich um ein Public-Key-Verfahren mit asymmetrischer Verschlüsselung. Das heisst, dass es einmal einen öffentlichen Schlüssel gibt, mit dem jeder beliebige Daten für den Empfänger verschlüsseln und signieren kann und einen privaten geheimen Schlüssel der vom Empfänger benutzt wird um die Nachricht, die mit seinem öffentlichen Schlüssel verschlüsselt wurde, zu entschlüsseln.
+Solange man seinen privaten Schlüssel geheim behält, ist es wahnsinnig schwierig, sowie sehr Rechenleistungs- und Zeitinsensiv einen solch verschlüsselte Nachricht zu knacken.
+Es gibt eine Menge an Erweiterungen für die gängisten Mail-Clients um diese Verschlüsselungsfunktion nach zu rüsten.
+\subsection{Ich als Provider}
+Wie wir gesehen haben, macht ein Provider eigentlich nicht viel aus. Was dieser lediglich zu tun hat, damit man E-Mails versenden und empfangen kann, ist es einen MTA und einen MDA zur Verfügung zu stellen, sowie die E-Mail Adresse korrekt zu konfigureren, damit die Mails auch ihren richtigen Weg gehen. Natürlich müssne diese beiden Server am Internet angehängt sein und dauerhaft laufen.
+Und was ein Provider kann, können wir auch und ist auch gar nicht mal so schwierig:
+\subsection{Der Versuch}
+\subsubsection{Was man dazu braucht}
+Um einen Mail Transport und einen Mail Delivery Agent betreiben zu können braucht man nichts weiter als einen Computer, ein Linux Betriebssystem, eine passende Software sowie ein bisschen Know-How um das ganze zum laufen zu bringen. Die Computer Hardware kann man sich für mehr oder weniger Geld kaufen, das Linux Betriebssystem kann man legal und gratis aus dem Internet herunterladen und das Know-How kann man sich im Internet aneigenen, so gibt es ganze Anleitungen für den Anfänger sowie auch für die Profis.
+
