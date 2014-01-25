@@ -1,0 +1,175 @@
+\section{ownCloud einrichten}
+Nach dem das Betriebssystem erfolgreich auf dem Raspberry Pi aufgesetzt werden konnte, können wir mit der eigentlichen Installation von ownCloud beginnen.
+
+\subsection{System aktualisieren}
+Um sicher zu stellen, dass das System auf dem aktuellsten Stand ist, beginnen wir mit der Aktualisierung der bereits installierten Paketen.
+Dazu und für alle weiteren Schritte benötigen wir ein Terminal. Dieses öffnet man indem man das Startmenü am linken unteren Rand öffnet und dann auf ``Accessories -> LXTerminal'' klickt. So öffnet sich ein Terminal mit schwarzem Hintergrund.  \\
+Geben sie nun die folgenden Befehle ein um das System zu aktualisieren:
+\begin{lstlisting}[frame=single, language=bash]
+sudo apt-get update
+sudo apt-get upgrade
+\end{lstlisting}
+
+\subsection{Abhänigkeiten installieren}
+Damit ownCloud reibungslos laufen kann, müssen einige zusätzliche Pakete installiert werden:
+
+\begin{lstlisting}
+sudo apt-get install apache2 php5 php5-gd php5-sqlite php5-curl php5-json php5-common php5-intl php-pear php-apc php-xml-parser libapache2-mod-php5 curl libcurl3 libcurl3-dev sqlite
+\end{lstlisting}
+
+\subsection{Statische IP-Adresse}
+Die IP-Adresse, durch welche der Computer im Netz eindeutig identifiziert werden kann und über welche der Zugriff erfolgen wird, kann nach jedem Computerstart anderst sein.
+Deshalb ist es sinnvoll, dass die IP-Adresse statisch festgelegt wird und immer dieselbe bleibt.
+Auf unserem Raspbian kann dies mit folgenden Schritten bewerkstelligt werden:
+
+\begin{itemize}
+  \item Die Netwerkkonfigurationsdatei unter ``/etc/network/interfaces'' muss wie folgt ergänzt werden:
+    \begin{lstlisting}
+iface eth0 inet static
+address 192.168.1.99
+netmask 255.255.255.0
+gateway 192.168.1.1
+network 192.168.1.0
+broadcast 192.168.1.255
+    \end{lstlisting}
+    Die verwendete IP-Adresse in der zweiten Zeile (192.168.1.99) sollte durch die aktuelle IP Adresse des Systems ersetzt werden, sofern nichts anderes gewünscht wird. Diese ermitteln sie mit dem Kommando ``ifconfig'', welches in ein Terminal eingegeben werden muss:
+    % FIXME: placholder for ifconfig screenshot
+  \item Nun muss das Interface neu gestartet werden:
+    \begin{lstlisting}
+sudo ifdown eth0
+sudo ifup eth0
+    \end{lstlisting}
+\end{itemize}
+
+\subsection{Webserver-Benutzer anlegen}
+Aus Sicherheitsgründen sollte ein Webserver immer von eine Benutzer ausgeführt werden, welcher eingeschränkte Rechte hat und nur auf jene Dateien zugreifen kann, die er auch wirklich braucht. Dazu legen wir einen Benutzer namens ``www-data' an und fügen ihn anschliessen einer gleichnamigen Gruppe zu:
+
+\begin{lstlisting}
+sudo groupadd www-data
+sudo usermod -a -G www-data www-data
+\end{lstlisting}
+
+\subsection{Webserver konfigurieren}
+Als Webserver werden wir apache2 verwenden. Dieser wurde bereits unter ``Abhängigkeiten installieren'' installiert.
+
+\begin{itemize}
+  \item Apache verlangt beim Start zu wissen, wie der Webserver heisst. Wir verwenden als Namen des Webservers ``owncloud''
+  \subitem Wir fügen nun den Webservernamen der Konfigurationsdatei von Apache hinzu:
+    \begin{lstlisting}
+sudo echo "ServerName owncloud" >> /etc/apache2/apache2.conf
+    \end{lstlisting}
+  \item Auch unserem System selbst müssen wir diesen Namen bekannt geben. Dazu fügen wir folgende Zeile der Datei ``/etc/hosts'' hinzu:
+    \begin{lstlisting}
+sudo echo "127.0.0.1 ownloud" >> /etc/hosts
+    \end{lstlisting}
+  \item Damit owncloud korrekt ausgeführt werden darf, müssen wir ihm noch gewisse Rechte einräumen.
+    Dazu öffnen wir die Apache Konfigurationsdatei ``/etc/apache2/sites-enabled/000-default'':
+    \begin{lstlisting}
+sudo nano /etc/apache2/sites-enabled/000-default
+    \end{lstlisting}
+    Und suchen nach folgendem Abschnitt:
+    \begin{lstlisting}
+<Directory /var/www/>
+  Options Indexes FollowSymLinks MultiViews
+  AllowOverride All
+  Order allow,deny
+  allow from all
+</Directory>
+    \end{lstlisting}
+    Dort ersetzen wir die Zeile: ``AllowOverride None'' mit ``AllowOverride All''.
+  \item Zum Schluss sollen noch ein paar zusätzliche Module für unseren Webserver installiert werden:
+    \begin{lstlisting}
+sudo a2enmod rewrite
+sudo a2enmod headers
+    \end{lstlisting}
+\end{itemize}
+
+\subsection{Webserver absichern}
+Ein grosses Thema in Sachen Cloud ist immer die Sicherheit. Hier möchten wir natürlich nicht zu kurz kommen, weshalb wir unseren Apache Webserver mit HTTPS\footnote{\url{http://de.wikipedia.org/wiki/Https}} ausstatten.
+
+\begin{itemize}
+  \item Zuerst müssen wir uns ein Zertifikat mit Schlüssel generieren lassen und in ein bestimmtes Verzeichnis ablegen, damit der Webserver es finden kann.
+    \begin{lstlisting}
+sudo mkdir -p /etc/apache2/ssl
+sudo openssl req -new -x509 -days 365 -nodes -out /etc/apache2/ssl/apache.pem -keyout /etc/apache2/ssl/apache.pem
+sudo ln -sf /etc/apache2/ssl/apache.pem /etc/apache2/ssl/`/usr/bin/openssl x509 -noout -hash < /etc/apache2/ssl/apache.pem`
+sudo chmod 600 /etc/apache2/ssl/apache.pem
+    \end{lstlisting}
+    % FIXME: test if apache listen on port 443 per default
+  \item Nach der Erstellung unseres Zertifikates muss das Apache Modul geladen werden, das einem SSL (HTTPS) zur Verfügung stellt:
+    \begin{lstlisting}
+sudo a2enmod ssl
+sudo echo "<virtualhost *:443>
+  SSLEngine On
+  SSLCertificateFile /etc/apache2/ssl/apache.pem
+  DocumentRoot /var/www
+</virtualhost>" >> /etc/apache2/sites-available/ssl
+sudo a2ensite ssl
+    \end{lstlisting}
+\end{itemize}
+
+\subsection{PHP konfigurieren}
+PHP standardmässig ein Sicherheitslimit gesetzt, welches die Uploadgrösse einer Datei einschränkt. Diese wollen wir aber gerne erhöhen, damit wir in der Lage sind Dateien hochzuladen die grösser als 2 Megabyte sind.
+
+\begin{lstlisting}
+sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 2G/' /etc/php5/apache2/php.ini
+sed -i 's/post_max_size = 8M/post_max_size = 2G/' /etc/php5/apache2/php.ini
+\end{lstlisting}
+
+\subsection{ownCloud installieren}
+Zuerst laden wir die neuste Version von ownCloud herunter. Um herauszufinden welches die neuste Version ist, besucht man am besten die offizielle Homepage\footnote{\url{https://owncloud.org/}} oder Wikipedia. Zur Zeit ist Version 6.0.0 die neuste. Sie kann wie folgt direkt aus dem Terminal heruntergeladen werden:
+
+% FIXME: check if ~ is prefered dir
+\begin{lstlisting}
+cd
+wget http://download.owncloud.org/community/owncloud-6.0.0.tar.bz2 -O owncloud.tar.bz2
+\end{lstlisting}
+
+Nun entpacken wir das heruntergeladene Archiv und verschieben die Dateien in den Ordner ``/var/www''. Dieser Ordner ist standardmässig der vom Webserver benutze.
+
+\begin{lstlisting}
+tar xvf owncloud.tar.bz2
+rm -rf owncloud owncloud.tar.bz2
+rm -f /var/www/index.html
+sudo mv owncloud/* /var/www
+sudo mv owncloud/.htaccess /var/www
+\end{lstlisting}
+
+Damit der zuvor erstellte Benutzer ``www-data'' auch auf diese Dateien zugreifen kann, müssen wir ihm die Rechte dazu geben:
+
+\begin{lstlisting}
+sudo chown -R www-data:www-data /var/www
+\end{lstlisting}
+
+\subsection{Speicher erweitern}
+Da die verwendete SD-Karte eine eher kleine Kapazität hat, lohnt es sich, ownCloud mehr Speicher zur Verfügung zu stellen. Man kann dazu einfach eine externe Festplatte per USB an den Raspberry anschliessen
+und diese anschliessend konfigurieren. \\
+\begin{lstlisting}
+sudo mkdir -p /mnt/ownclouddata
+\end{lstlisting}
+Damit die Festplatte bei jedem Neustart wieder automatisch zur Verfügung stehen, müssen wir dies im System konfigurieren. Wir müssen hierzu zuerst die Formatierung der Festplatte ausfindig machen.
+
+\begin{lstlisting}
+sudo blkid /dev/sdb1
+\end{lstlisting}
+
+Den Wert ohne Anführungszeichen nach TYPE müssen wir uns merken - Es ist der Name des verwendeten Dateisystems auf dem Datenträger.
+Bevor wir den nachfolgenden Befehl aussühren können müssen wir das Wort TYPE durch unser Dateisystem ersetzen.
+
+\begin{lstlisting}
+echo "/dev/sdb1 /mnt/ownclouddata TYPE defaults 0 0" >> /etc/fstab
+\end{lstlisting}
+
+Nun binden wir die Festplatte in unser System ein und geben dem Benutzer ``www-data'' wieder die entsprechenden Rechte:
+
+\begin{lstlisting}
+sudo mount -a
+sudo chown -R www-data:www-data /mnt/ownclouddata
+\end{lstlisting}
+
+\subsection{Webserver neustarten}
+Zu guter letzt muss der Webserver neu gestartet werden, damit die Änderungen wirksam werden:
+
+\begin{lstlisting}
+sudo service apache2 restart
+\end{lstlisting}
