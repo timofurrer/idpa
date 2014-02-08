@@ -34,7 +34,7 @@ build()
   ls $SECTIONS_DIR/*.tex | sort -V | awk '{ printf "\\input{%s}\n", $1}' > $TEMP_DIR/sections.tex
 
   log "Create pdf from latex"
-  pdflatex --halt-on-error --output-directory="$OUTPUT_DIR" document.tex > /dev/null
+  pdflatex --halt-on-error --output-directory="$OUTPUT_DIR" document.tex > /dev/null 2>&1
   if [[ $? -ne 0 ]]; then
     log_error "Failed to create pdf from latex (see $OUTPUT_DIR/document.log)"
   fi

@@ -265,7 +265,7 @@ Dazu öffnet man ``/etc/postfix/main.cf'' mit einem Texteditor (hier Nano):
 nano /etc/postfix/main.cf
 \end{lstlisting}
 
-Als erstes müssen alle Parameter unter ``# TLS Parameters" auskommentiert werden. Dies geschieht mittels einfügen einer Raute (#) vor jeder Zeile.
+Als erstes müssen alle Parameter unter ``\# TLS Parameters" auskommentiert werden. Dies geschieht mittels einfügen einer Raute (\#) vor jeder Zeile.
 
 Nun fügt man unter den auskommentierten Zeilen folgende hinzu:
 
@@ -457,7 +457,7 @@ service imap-login {
   inet_listener imap {
     port = 0
   }
-…
+...
 service pop3-login {
   inet_listener pop3 {
     port = 0
@@ -484,7 +484,7 @@ service lmtp {
 }
 \end{lstlisting}
 
-In derselben Datei kann nun noch der Block zu den Services ``auth'' und ``service_auth_worker'' durch folgendes erstzt werden:
+In derselben Datei kann nun noch der Block zu den Services \textit{auth} und \textit{service\_auth\_worker} durch folgendes erstzt werden:
 
 \begin{lstlisting}
 service auth {
