@@ -1,9 +1,11 @@
 \section{Einleitung}
-Dieses Handbuch zeigt Schritt für Schritt auf, wie ein Raspberry Pi als Tor Proxy verwendet werden kann. Hierbei geh es vorallem darum, sich anonym im Internet bewegen zu können. Die Anonymität wird dadurch gewehrleistet, dass wir nicht direkt zu unserem Ziel surfen sondern vorher noch bei weiteren TOR-Proxies vorbei gehen. 
-
-Für die Erstellung dieses Tutorials wurde ein Raspberry Pi verwendet. 
+Dieses Handbuch zeigt Schritt für Schritt auf, wie ein Raspberry Pi mit ein wenig Zubehör in einen Tor-Proxy umgewandelt werden kann. Mittels Tor-Proxy kann sich der Anwender schnell und einfach Anonymität verschaffen und so sicherer im Internet unterwegs sein.  Die Anonymität wird dabei durch das Tor-Netzwerk zur Verfügung gestellt, in das sich der Anwender über den Proxy einklinkt. Dieses Handbuch macht vor allem dann Sinn, wenn das Prinzip und die Funktionsweise von Tor bekannt sind. Folgende Seiten sind eine erste Anlaufstelle für zusätzliche Informationen: 
+\begin{itemize}
+\item Homepage des Torprojektes, Englisch: \url{https://www.torproject.org/}
+\item Wikipedia-Artikel, Deutsch: \url{http://de.wikipedia.org/wiki/Tor_\%28Netzwerk\%29}
+\end{itemize}
 
 \input{../../raspberrypi.tex}
 
 \section{Washalb ein Raspberry Pi}
-Die Frage die sich natürlich stellt ist, wieso ein Raspberry Pi gut für einen TOR-Proxy geeignet ist. Dies hat erstens den Grund, dass die Hardware an und für sich für recht wenige Geld erhältlich ist und trotzdem die benötigte Leistung bringen kann. Ein weiterer wichtiger Punkt ist, dass der Raspberry Pi durch seine Grösse sehr mobil ist und man ihn überall hin mitnehmen könnte. Ist man beispielsweise auf Geschäftsreise oder in den Ferien und möchte nicht, dass das Hotel, oder wer auch immer das Internet zur Verfügung stellt, mitbekommt, was man sich im Netz gerade anschaut, kann man einfach kurzerhand den Pi in Betrieb nehmen und \textit{anonym} lossurfen.
+Die Frage die sich vielleicht stellt ist, wieso gerade der Raspberry Pi gut als Tor-Proxy geeignet ist. Dies hat zum einen den Grund, dass die Hardware an sich für wenig Geld erhältlich ist und trotzdem die benötigte Leistung bringt. Ein anderer, fast noch wichtigerer Punkt ist der, dass der Raspberry Pi durch geringe Grösse sehr mobil ist. Man kann ihn überall hin mitnehmen, ohne dass er gross auffällt oder Schwierigkeiten bereitet. Ist man beispielsweise auf Geschäftsreise und möchte nicht, dass das Hotel mitkriegt, wo man im Internet unterwegs ist, kann man kurzerhand den Pi in Betrieb nehmen und \textit{anonym} lossurfen.
