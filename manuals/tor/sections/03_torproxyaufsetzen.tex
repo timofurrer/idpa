@@ -9,7 +9,7 @@ Wenn wir auf der, nun erschienen, Ausgabe einen Eintrag für \textit{wlan0} sehe
 
 \section{WiFi Access Point einrichten}
 Wie vielleicht bemerkt haben wir nun zwei Schnittstellen um uns mit dem Internet zu verbinden. Einmal per Netzwerkkabel und einmal per WiFi Adapter.
-Das Netzwerkkabel dient hier dazu den Raspberry Pi mit dem Internet zu verbinden und der WiFi Adapter wird verwendet um ein lokales Wlan einzurichten. Diese Funktionalität ist im Prinzip die gleiche, wie sie wahrscheinlich auch unser Router zur Verfügung stellt. 
+Das Netzwerkkabel dient hier dazu den Raspberry Pi mit dem Internet zu verbinden und der WiFi Adapter wird verwendet um ein lokales Wlan einzurichten. Diese Funktionalität ist im Prinzip die gleiche, wie sie wahrscheinlich auch unser Router zur Verfügung stellt.
 Hierzu benötigen wir einen eigenen DHCP-Server, welcher auf unserem Wlan eingerichtet ist und dafür verantwortlich ist, dass dieser Computer, der sich mit diesem Wlan verbindet eine valide IP-Adresse erhält und somit ein Teil des Netzes wird.
 
 Dieser und ein Tool, welches als \textit{Access Point} selbst dient, müssen durch folgenden Befehl installiert werden:
@@ -135,7 +135,7 @@ Zuerst wird der Datei \textit{/etc/sysctl.conf} folgendes am Ende angefügt:
 
 \begin{lstlisting}
 net.ipv4.ip_forward=1
-\end{lstlisting} 
+\end{lstlisting}
 
 Und danach soll noch folgendes ausgeführt werden, um das Weiterleiten im laufenden Betrieb vom System zu aktivieren:
 
@@ -159,4 +159,74 @@ iptables-save > /etc/iptables.ipv4.nat
 echo "up iptables-restore < /etc/iptables.ipv4.net" >> /etc/network/interfaces
 \end{lstlisting}
 
+\section{Aufstarten von hostapd und unserem DHCP}
+Bevor das Wlan-Netz getestet werden kann, müssen alle beteiligten Komponenten aufgestartet werden.
+Hier genügen folgende Befehle:
 
+\begin{lstlisting}
+service hostapd start
+service isc-dhcp-server start
+\end{lstlisting}
+
+\section{Tor aufsetzen}
+TOR kann man wie die zuvor verwendeten Programme auch über die Paketverwaltung installieren:
+
+\begin{lstlisting}
+apt-get install tor
+\end{lstlisting}
+
+Nach der Installation muss TOR natürlich noch entsprechend, für unseren Nutzen, konfiguriert werden. \\
+Direkt nach dem einleitenden Kommentarblock kommen folgende Konfigurationen:
+
+\begin{lstlisting}
+Log notice file /var/log/tor/notices.log
+VirtualAddrNetwork 10.192.0.0/10
+AutomapHostsSuffixes .onion,.exit
+AutomapHostsOnResolve 1
+TransPort 9040
+TransListenAddress 192.168.66.1
+DNSPort 53
+DNSListenAddress 192.168.66.1
+\end{lstlisting}
+
+Es sind weitere Einstellungen vorzunehmen. Und zwar muss der Firewall beigebracht werden, dass die Kommunikation, welche über das Wlan-Netz kommt, über das TOR-Netzwerk weitergeleitet werden soll. \\
+Dazu einfach folgende Befehle ausführen:
+
+%% FIXME: ssh chapter!
+
+\begin{lstlisting}
+iptables -F
+iptables -t nat -F
+iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 22 -j REDIRECT --to-ports 22
+iptables -t nat -A PREROUTING -i wlan0 -p udp --dport 53 -j REDIRECT --to-ports 53
+iptables -t nat -A PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040
+iptables-save > /etc/iptables.ipv4.nat
+\end{lstlisting}
+
+In der \textit{torrc} Konfigurationsdatei wurde eine Logdatei angegeben, dort werden alle Logs hingeschrieben. \\
+Diese Datei muss nun erstellt und mit den entsprechenden Rechten versehrt werden:
+
+\begin{lstlisting}
+touch /var/log/tor/notices.log
+chown debian-tor /var/log/tor/notices.log
+chmod 644 /var/log/tor/notices.log
+\end{lstlisting}
+
+Nun kann man TOR mit den neuen Konfigurationen neustarten:
+
+\begin{lstlisting}
+service tor restart
+\end{lstlisting}
+
+Und um zu prüfen ob TOR auch mit den neuen Konfigurationen erfolgreich gestartet werden konnte, kann man folgendes ausführen:
+
+\begin{lstlisting}
+service tor status
+\end{lstlisting}
+
+Die Ausgabe sollte ähnlich dieser sein:
+
+% FIXME: screenshot
+
+\section{IP-Adresse verifizieren}
+Mittels \url{ipchicken.com} kann die IP-Adresse ermittelt werden, mit der man sich im Internet bewegt. Diese wird einem normalerweise vom Provider zugeteilt und ändert sich nicht so schnell. Mit einem funktionierenden TOR-Setup, ändert sich das Verhalten. Dadurch, das die gesendete Abfrage drei verschiedene TOR-Server passiert, ändert sich die Urpsrungs-IP-Adresse des Paketes jedes Mal. Um dieses Verhalten zu verifizieren, muss man sich lediglich von einem Computer im normalen Netzt und einem Computer vom eigens geschaffenen Wlan-Netz mit IP-Chicken verbinden. Sind die IP-Adressen nicht identisch und steht beim Computer vom Wlan-Netzt nichts vom Provider, läuft TOR erfolgreich.
