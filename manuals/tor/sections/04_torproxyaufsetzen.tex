@@ -1,32 +1,35 @@
 \section{WiFi Adapter teste}
-Zuallererst lohnt es sich, zu überprüfen, ob der angeschaffte WiFi-Adapter auf dem aufgespielten Betriebssystem lauffähig ist. Dazu muss man lediglich den Adapter in den USB-Port stecken und nach kurzer Wartezeit folgendes Kommando aufrufen:
+Es lohnt sich, zuerst überprüfen, ob der angeschaffte WiFi-Adapter auf dem aufgespielten Betriebssystem lauffähig ist. Dazu muss man lediglich den Adapter in den USB-Port stecken und nach kurzer Wartezeit folgendes Kommando aufrufen:
 
 \begin{lstlisting}
 ifconfig -a
 \end{lstlisting}
 
-Wenn auf der erschienen Ausgabe einen Eintrag für \textit{wlan0} sehen ist, kann mit der Einrichtung des Access Points bgeonnen werden.
+Wenn auf der erschienen Ausgabe einen Eintrag für \textit{wlan0} zu sehen ist, kann mit der Einrichtung des Access Points begonnen werden.
 
-\section{WiFi Access Point einrichten}
-Wie vielleicht bemerkt haben wir nun zwei Schnittstellen um uns mit dem Internet zu verbinden. Einmal per Netzwerkkabel und einmal per WiFi Adapter.
-Das Netzwerkkabel dient hier dazu den Raspberry Pi mit dem Internet zu verbinden und der WiFi Adapter wird verwendet um ein lokales Wlan einzurichten. Diese Funktionalität ist im Prinzip die gleiche, wie sie wahrscheinlich auch unser Router zur Verfügung stellt.
-Hierzu benötigen wir einen eigenen DHCP-Server, welcher auf unserem Wlan eingerichtet ist und dafür verantwortlich ist, dass dieser Computer, der sich mit diesem Wlan verbindet eine valide IP-Adresse erhält und somit ein Teil des Netzes wird.
+% FIXME: Bild von ifconfig?
 
-Dieser und ein Tool, welches als \textit{Access Point} selbst dient, müssen durch folgenden Befehl installiert werden:
+\section{Access Point einrichten}
+Mit dem eingesteckten Netzwerkkabel und dem per USB angeschlossenen WiFi-Adapter stehen nun zwei Schnittstellen zur Verfügung, um sich mit dem Internet zu verbinden. Das Netzwerkkabel hat die Aufgabe, den Raspberry Pi mit dem Internet zu verbinden. Der WiFi-Adapter hingegen soll so eingerichtet werden, dass er ein lokales WLAN aufzieht.
+Hierzu wird ein eigener DHCP-Server benögtigt, welcher dafür verantwortlich ist, dass jeder Computer, der sich mit dem WLAN verbindet, eine valide IP-Adresse erhält und somit ein Teil des Netzes werden kann.
 
+% FIXME: Acces Point erklären??
+
+Dieser und die Software, welche als \textit{Access Point} selbst agiert, müssen durch folgenden Befehl installiert werden:
+ 
 \begin{lstlisting}
 apt-get install hostapd isc-dhcp-server
 \end{lstlisting}
 
-\subsection{DHCP Server konfigurieren}
-Damit der DHCP Server richtig funktionieren kann, muss dieser zuerst ein wenig konfiguriert werden.
-Dazu öffnen wir die Datei \textit{/etc/dhcp/dhcpd.conf}.
+\subsection{DHCP-Server konfigurieren}
+Damit der DHCP-Server auch richtig funktioniert, muss er zuerst ein wenig konfiguriert werden.
+Dazu öffnen man die Datei \textit{/etc/dhcp/dhcpd.conf} mit einem Texteditor. Hier wird dazu der vorinstallierte Texteditor Nano verwendet.
 
 \begin{lstlisting}
 nano /etc/dhcp/dhcpd.conf
 \end{lstlisting}
 
-Zuerst müssen die folgenden Zeile gefunden und mit einer vorangestellten Raute (\#) auskommentiert werden:
+Zuerst müssen die folgenden Zeile gefunden und mit einer vorangestellten Raute (\#) auskommentiert werden. Auskommentiert bedeutet, dass die Zeile ungültig und somit nicht mehr aktiv ist:
 
 \begin{lstlisting}
 option domain-name "example.org"
@@ -40,20 +43,21 @@ Neu sieht das ganze folgendermassen aus:
 #option domain-name-server ns1.example.org,ns2.example.org
 \end{lstlisting}
 
-Als nächstes muss dem DHCP Server gesagt werden, dass er der offizielle DHCP Server dieses Netzes ist. Dies hat zur Folge, dass er auf DHCPRequests eines Clients eine IP Adresse zurück gibt.
-Dazu suchen wir folgende Zeile:
+Als nächstes muss dem installierten DHCP-Server gesagt werden, dass er der offizielle DHCP-Server dieses Netzes ist. Einmal eingestellt vergibt er fortan valide IP-Adressen an jeden Client, der ihn mittels DHCP-Request anfragt.
+Dazu muss folgende Zeile einkommentiert - die vorangestellte Raute entfernt - werden. Aus
 
 \begin{lstlisting}
 #authoritative;
 \end{lstlisting}
 
-und machen daraus:
+wird somit:
 
 \begin{lstlisting}
 authoritative;
 \end{lstlisting}
 
-Nun fügen wir noch folgende Zeilen am Ende der Datei ein, um damit unser Netz zu konfigurieren:
+Jetzt gilt es, alle Einstellungen des vom WiFi-Adapter künftig aufgezogenen WLANs festzulegen. 
+An Ende der Datei müssen dazu folgende Zeilen angefügt werden:
 
 \begin{lstlisting}
 subnet 192.168.66.0 netmask 255.255.255.0 {
@@ -67,16 +71,15 @@ subnet 192.168.66.0 netmask 255.255.255.0 {
 }
 \end{lstlisting}
 
-Den DHCP Server ist nun fertig konfiguriert. Jedoch muss man ihn nun noch an ein Netwerkinterface binden. Dieses Netzwerkinterface ist in unserem Fall wlan0 wie wir zu anfang ausfindig machen konnten.
-
-In der Datei \textit{/etc/default/isc-dhcp-server} muss bei der Einstellung \textit{INTERFACES} wlan0 eingetragen werden:
+Den DHCP-Server ist nun fertig konfiguriert. Man muss ihn noch an ein Netwerkinterface binden. Dieses Netzwerkinterface ist in diesem Fall wlan0, wie schon zu beginn mit ``ifconfig'' herausgefunden werden konnte.
+In der Datei \textit{/etc/default/isc-dhcp-server} muss dazu bei der Einstellung \textit{INTERFACES} wlan0 eingetragen werden:
 
 \begin{lstlisting}
 INTERFACES="wlan0"
 \end{lstlisting}
 
-Unserem \textit{wlan0} Interface kann jetzt eine statische IP-Adresse vergeben wird. Und zwar jene, die wir bei der DHCP Server Konfiguration bei der Subnetzoption \textit{routers} angegeben haben. \\
-In der Datei \textit{/etc/network/interfaces} ändern wir folgende Zeilen:
+Dem Interface \textit{wlan0} kann jetzt eine statische IP-Adresse vergeben wird. Es handelt sich dabei um jene Adresse, die bei der Konfiguration des DHCP-Server bei \textit{option routers} angegeben wurde. \\
+In der Datei \textit{/etc/network/interfaces} müssen die Zeilen:
 
 \begin{lstlisting}
 iface wlan0 inet manual
@@ -84,7 +87,7 @@ wpa-roam: /etc/etc/wpa_supplicant/wpa_supplicant.conf
 iface default inet dhcp
 \end{lstlisting}
 
-Durch folgendes:
+Mit den folgenden ersetzt werden:
 
 \begin{lstlisting}
 iface wlan0 inet static
@@ -92,11 +95,13 @@ iface wlan0 inet static
   netmask 255.255.255.0
 \end{lstlisting}
 
-Da dieses Interface bereits gestartet ist, kann man mit folgendem Befehl im laufenden Betrieb eine statische IP-Adresse vergeben:
+Das Interface \textit{wlan0} läuft zu diesem Zeitpunkt bereits. Damit die Änderung sofort wirksam wird, kann man dem Interface mit folgendem Befehl die zuvor definierte IP-Adresse aufzwingen:
 
 \begin{lstlisting}
 ifconfig wlan0 192.168.66.1
 \end{lstlisting}
+
+% FIXME: ifconfig oder ifup?
 
 \subsection{Hostapd konfigurieren}
 Weiter geht es darum den Access Point selbst einzurichten. Das verwendete Tool hostapd haben wir bereits installiert.
