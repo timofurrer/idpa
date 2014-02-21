@@ -1,4 +1,4 @@
-\section{WiFi Adapter teste}
+\section{WiFi-Adapter testen}
 Es lohnt sich, zuerst überprüfen, ob der angeschaffte WiFi-Adapter auf dem aufgespielten Betriebssystem lauffähig ist. Dazu muss man lediglich den Adapter in den USB-Port stecken und nach kurzer Wartezeit folgendes Kommando aufrufen:
 
 \begin{lstlisting}
@@ -7,29 +7,28 @@ ifconfig -a
 
 Wenn auf der erschienen Ausgabe einen Eintrag für \textit{wlan0} zu sehen ist, kann mit der Einrichtung des Access Points begonnen werden.
 
+% FIXME: Was, wenn wlan0 nicht auftaucht?
 % FIXME: Bild von ifconfig?
+% FIXME: Bild von Pi mit eingesteckter Antenne?
 
 \section{Access Point einrichten}
-Mit dem eingesteckten Netzwerkkabel und dem per USB angeschlossenen WiFi-Adapter stehen nun zwei Schnittstellen zur Verfügung, um sich mit dem Internet zu verbinden. Das Netzwerkkabel hat die Aufgabe, den Raspberry Pi mit dem Internet zu verbinden. Der WiFi-Adapter hingegen soll so eingerichtet werden, dass er ein lokales WLAN aufzieht.
-Hierzu wird ein eigener DHCP-Server benögtigt, welcher dafür verantwortlich ist, dass jeder Computer, der sich mit dem WLAN verbindet, eine valide IP-Adresse erhält und somit ein Teil des Netzes werden kann.
+Mit dem eingesteckten Netzwerkkabel und dem per USB angeschlossenen WiFi-Adapter stehen nun zwei Netzwerk-Schnittstellen zur Verfügung. Das Netzwerkkabel hat die Aufgabe, den Raspberry Pi mit dem Internet zu verbinden. Der WiFi-Adapter hingegen soll so eingerichtet werden, dass er ein lokales WLAN aufzieht. Der Raspberry Pi fungiert somit als Wireless Access Point. Ein Wireless Access Point ermöglicht es Geräten wie Notebooks oder Smartphones, sich über ihn kabellos mit dem Internet zu verbinden. Neben der Software für den Access Point selbst wird ein eigener DHCP-Server benögtigt. Dieser ist dafür verantwortlich, dass jeder Computer, der sich mit dem WLAN verbindet, eine valide IP-Adresse erhält und somit ein Teil des Netzes werden kann.
 
-% FIXME: Acces Point erklären??
-
-Dieser und die Software, welche als \textit{Access Point} selbst agiert, müssen durch folgenden Befehl installiert werden:
+Mit folgenden befehlen können die benötigten Softwarekomponenten installiert werden.
  
 \begin{lstlisting}
 apt-get install hostapd isc-dhcp-server
 \end{lstlisting}
 
 \subsection{DHCP-Server konfigurieren}
-Damit der DHCP-Server auch richtig funktioniert, muss er zuerst ein wenig konfiguriert werden.
-Dazu öffnen man die Datei \textit{/etc/dhcp/dhcpd.conf} mit einem Texteditor. Hier wird dazu der vorinstallierte Texteditor Nano verwendet.
+Damit der DHCP-Server auch richtig funktioniert, muss er zuerst konfiguriert werden.
+Dazu öffnet man die Datei \textit{/etc/dhcp/dhcpd.conf} mit einem Texteditor. Hier wird dazu der vorinstallierte Texteditor Nano verwendet.
 
 \begin{lstlisting}
 nano /etc/dhcp/dhcpd.conf
 \end{lstlisting}
 
-Zuerst müssen die folgenden Zeile gefunden und mit einer vorangestellten Raute (\#) auskommentiert werden. Auskommentiert bedeutet, dass die Zeile ungültig und somit nicht mehr aktiv ist:
+Zuerst müssen die folgenden Zeile gefunden und mittels einer vorangestellten Raute (\#) auskommentiert werden. Auskommentiert bedeutet, dass die Zeile ungültig und somit nicht mehr aktiv ist.
 
 \begin{lstlisting}
 option domain-name "example.org"
@@ -43,25 +42,27 @@ Neu sieht das ganze folgendermassen aus:
 #option domain-name-server ns1.example.org,ns2.example.org
 \end{lstlisting}
 
-Als nächstes muss dem installierten DHCP-Server gesagt werden, dass er der offizielle DHCP-Server dieses Netzes ist. Einmal eingestellt vergibt er fortan valide IP-Adressen an jeden Client, der ihn mittels DHCP-Request anfragt.
-Dazu muss folgende Zeile einkommentiert - die vorangestellte Raute entfernt - werden. Aus
+Als nächstes muss dem DHCP-Server mitgeteilt werden, dass er der offizielle DHCP-Server dieses Netzes ist. Einmal eingestellt vergibt er fortan valide IP-Adressen an jeden Client, der ihn per DHCP-Request anfragt.
+Dazu muss folgende Zeile einkommentiert - die vorangestellte Raute entfernt - werden.
+\\
+Aus
 
 \begin{lstlisting}
 #authoritative;
 \end{lstlisting}
 
-wird somit:
+wird:
 
 \begin{lstlisting}
 authoritative;
 \end{lstlisting}
 
-Jetzt gilt es, alle Einstellungen des vom WiFi-Adapter künftig aufgezogenen WLANs festzulegen. 
-An Ende der Datei müssen dazu folgende Zeilen angefügt werden:
+Für das WLAN, das künftig vom WiFi-Adapter aufgezogen wird, müssen auch noch diverse Einstellungen festgelegt werden.
+Man fügt dazu folgende Zeilen ans Ende der Datei an:
 
 \begin{lstlisting}
 subnet 192.168.66.0 netmask 255.255.255.0 {
-  range 192.168.42.10 192.168.42.50;
+  range 192.168.66.10 192.168.66.50;
   option broadcast-address 192.168.66.255;
   option routers 192.168.66.1;
   default-lease-time 666;
@@ -71,14 +72,14 @@ subnet 192.168.66.0 netmask 255.255.255.0 {
 }
 \end{lstlisting}
 
-Den DHCP-Server ist nun fertig konfiguriert. Man muss ihn noch an ein Netwerkinterface binden. Dieses Netzwerkinterface ist in diesem Fall wlan0, wie schon zu beginn mit ``ifconfig'' herausgefunden werden konnte.
+Den DHCP-Server ist nun fertig konfiguriert. Jetzt muss er an ein Netwerkinterface gebunden werden. Das gesuchte Netzwerkinterface ist in diesem Fall wlan0, wie man schon zu beginn mittels ``ifconfig'' herausgefunden hat.
 In der Datei \textit{/etc/default/isc-dhcp-server} muss dazu bei der Einstellung \textit{INTERFACES} wlan0 eingetragen werden:
 
 \begin{lstlisting}
 INTERFACES="wlan0"
 \end{lstlisting}
 
-Dem Interface \textit{wlan0} kann jetzt eine statische IP-Adresse vergeben wird. Es handelt sich dabei um jene Adresse, die bei der Konfiguration des DHCP-Server bei \textit{option routers} angegeben wurde. \\
+Dem Interface \textit{wlan0} kann jetzt eine statische IP-Adresse vergeben wird. Es handelt sich dabei um jene Adresse, die bei der Konfiguration des DHCP-Server bei \textit{option routers} angegeben wurde (192.168.66.1). \\
 In der Datei \textit{/etc/network/interfaces} müssen die Zeilen:
 
 \begin{lstlisting}
@@ -95,6 +96,8 @@ iface wlan0 inet static
   netmask 255.255.255.0
 \end{lstlisting}
 
+% FIXME: Bild von fertigem interfaces file?
+
 Das Interface \textit{wlan0} läuft zu diesem Zeitpunkt bereits. Damit die Änderung sofort wirksam wird, kann man dem Interface mit folgendem Befehl die zuvor definierte IP-Adresse aufzwingen:
 
 \begin{lstlisting}
@@ -104,8 +107,20 @@ ifconfig wlan0 192.168.66.1
 % FIXME: ifconfig oder ifup?
 
 \subsection{Hostapd konfigurieren}
-Weiter geht es darum den Access Point selbst einzurichten. Das verwendete Tool hostapd haben wir bereits installiert.
-Die Datei \textit{/etc/hostapd/hostapd.conf} muss erstellt und folgendes eingetragen werden:
+Weiter geht es darum den Access Point selbst einzurichten. Die verwendete Software \textit{hostapd} wurde zu Beginn des Abschnitt bereits installiert. 
+Wie schon beim DHCP-Server, müssen auch hier gewisse Konfigurationen vorgenommen werden. Das Konfigurationsfile für hostapd gibt es noch nicht, weshalb man zuerst eines erstellen muss:
+
+\begin{lstlisting}
+touch /etc/hostapd/hostapd.conf
+\end{lstlisting}
+
+Danach das File mit einem Texteditor öffnen:
+
+\begin{lstlisting}
+nano /etc/hostapd/hostapd.conf
+\end{lstlisting}
+
+Und folgende Zeilen hinzufügen:
 
 \begin{lstlisting}
 interface=wlan0
@@ -123,65 +138,82 @@ wpa_pairwise=TKIP
 rsn_pairwise=CCMP
 \end{lstlisting}
 
-Der Treiber ist je nach verwendetem WiFi Adapter anders. Was bedeutet, dass dieser zuerst ausfindig gemacht werden muss. \\
+Ein paar der obigen Werte kurz erklärt: 
+\begin{itemize}
+\item driver: Der Treiber des Wifi-Adapters, ist je nach Adapter anders und muss daher zuerst ausfindig gemacht werden
+\item ssid: Der Name des Netzes, wie man es nach aussen hin sieht
+\item wpa\_passphrase: Passwort des Netzes, sollte gut gewählt werden, um optimale Sicherheit zu bieten
+\end{itemize}
 
-Diese nun erstellte Konfiguration muss \textit{hostapd} bekannt gemacht werden. In der Datei \textit{/etc/default/hostapd.conf} muss nach \textit{DAEMON\_CONF} gesucht und diese Zeile wie folgt geändert werden:
+% FIXME: Beschreiben, wie Treiber ausfindig gemacht werden kann?
+
+Diese nun erstellte Konfiguration muss \textit{hostapd} bekannt gemacht werden. In der Datei \textit{/etc/default/hostapd.conf} muss nach \textit{DAEMON\_CONF} gesucht und die Zeile wie folgt verändert werden:
 
 \begin{lstlisting}
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 \end{lstlisting}
 
-Der Raspberry Pi ist nun soweit ein WiFi Netzwerk erstellen und sich mit dem Internet verbinden zu können. Was noch fehlt ist die Verbindung zwischen dem WiFi-Netz und dem Internet.
+Der Raspberry Pi ist nun soweit, ein WLAN aufziehen und sich mit dem Internet verbinden zu können. Was noch fehlt ist die Verbindung dazwischen.
 
 \subsection{NAT konfigurieren}
-NAT wird gebraucht um die Clients vom WiFi-Netz auf das Internet zu leiten.
+NAT (Network Address Translation) wird verwendet, um die mit dem WLAN verbundenen Geräte ins Internet weiterzuleiten.
 
-Zuerst wird der Datei \textit{/etc/sysctl.conf} folgendes am Ende angefügt:
+Zuerst wird der Datei \textit{/etc/sysctl.conf} folgendes angefügt:
 
 \begin{lstlisting}
 net.ipv4.ip_forward=1
 \end{lstlisting}
 
-Und danach soll noch folgendes ausgeführt werden, um das Weiterleiten im laufenden Betrieb vom System zu aktivieren:
+Damit die Weiterleitung im laufenden Betrieb aktiviert wird, muss der folgende Befehl ausgeführt werden:
 
 \begin{lstlisting}
 echo 1 > /proc/sys/net/ipv4/ip_forward
 \end{lstlisting}
 
-Weiter muss die Firewall entsprechend angepasst werden, damit NAT das eingerichtet Forwarding ausführen kann.
-Dazu folgende Befehle ausführen:
+Zusätzlich muss die Firewall so eingestellt werden, dass NAT das eingerichtete Forwarding ausführen kann:
 
 \begin{lstlisting}
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
 iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+
 iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 \end{lstlisting}
 
-Damit man diese Befehle nicht bei jedem Neustart des Raspberry Pi's eingeben muss, speichern wir diese mit folgendem Befehl permanent:
+Damit man diese Befehle nicht bei jedem Neustart des Raspberry Pi eingeben muss, können sie permanent gespeichert werden:
 
 \begin{lstlisting}
 iptables-save > /etc/iptables.ipv4.nat
+
 echo "up iptables-restore < /etc/iptables.ipv4.net" >> /etc/network/interfaces
 \end{lstlisting}
 
-\section{Aufstarten von hostapd und unserem DHCP}
-Bevor das Wlan-Netz getestet werden kann, müssen alle beteiligten Komponenten aufgestartet werden.
-Hier genügen folgende Befehle:
+\section{Aufstarten von hostapd und dem DHCP-Server}
+Bevor der Access Point getestet werden kann, müssen alle beteiligten Komponenten gestartet werden:
 
 \begin{lstlisting}
 service hostapd start
 service isc-dhcp-server start
 \end{lstlisting}
 
+% FIXME: Wie testen? Bild von Netzwerk?
+
 \section{Tor aufsetzen}
-TOR kann man wie die zuvor verwendeten Programme auch über die Paketverwaltung installieren:
+Es ist nun möglich, sich mittels Access Point mit dem Internet zu verbinden. Das Ziel ist es aber, dass diese Verbindung ins Internet über das Tor-Netzwerk erfolgt. Tor kann man, wie die zuvor verwendeten Programme auch, über die Paketverwaltung installieren:
 
 \begin{lstlisting}
 apt-get install tor
 \end{lstlisting}
 
-Nach der Installation muss TOR natürlich noch entsprechend, für unseren Nutzen, konfiguriert werden. \\
-Direkt nach dem einleitenden Kommentarblock kommen folgende Konfigurationen:
+Nach der Installation muss Tor natürlich noch entsprechend konfiguriert werden. Dazu öffnet man die Konfigurationsdatei mittels Texteditor: 
+
+\begin{lstlisting}
+nano /bla bla bla
+\end{lstlisting} 
+
+% FIXME: Pfad von torrc angeben
+
+Direkt nach dem einleitenden Kommentarblock müssen folgende Zeilen hinzugefügt werden:
 
 \begin{lstlisting}
 Log notice file /var/log/tor/notices.log
@@ -194,22 +226,34 @@ DNSPort 53
 DNSListenAddress 192.168.66.1
 \end{lstlisting}
 
-Es sind weitere Einstellungen vorzunehmen. Und zwar muss der Firewall beigebracht werden, dass die Kommunikation, welche über das Wlan-Netz kommt, über das TOR-Netzwerk weitergeleitet werden soll. \\
-Dazu einfach folgende Befehle ausführen:
+Die Datei sollte nun folgendermassen aussehen: 
 
-%% FIXME: ssh chapter!
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.6]{images/torrc}
+\caption{torrc Datei}
+\end{figure}
+
+Der Firewall muss jetzt noch beigebracht werden, dass jegliche Kommunikation vom WLAN-Netz über das Tor-Netzwerk weitergeleitet werden soll. \\
+Dazu müssen folgende Befehle abgesetzt werden:
+
+% FIXME: ssh chapter!
 
 \begin{lstlisting}
 iptables -F
+
 iptables -t nat -F
+
 iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 22 -j REDIRECT --to-ports 22
+
 iptables -t nat -A PREROUTING -i wlan0 -p udp --dport 53 -j REDIRECT --to-ports 53
+
 iptables -t nat -A PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040
+
 iptables-save > /etc/iptables.ipv4.nat
 \end{lstlisting}
 
-In der \textit{torrc} Konfigurationsdatei wurde eine Logdatei angegeben, dort werden alle Logs hingeschrieben. \\
-Diese Datei muss nun erstellt und mit den entsprechenden Rechten versehrt werden:
+In der \textit{torrc} Konfigurationsdatei wurde bei \textit{Log notice file} eine Datei angegeben, wo alle Logs hingeschrieben werden. Diese Datei muss nun erstellt und mit den entsprechenden Rechten versehen werden:
 
 \begin{lstlisting}
 touch /var/log/tor/notices.log
@@ -217,13 +261,13 @@ chown debian-tor /var/log/tor/notices.log
 chmod 644 /var/log/tor/notices.log
 \end{lstlisting}
 
-Nun kann man TOR mit den neuen Konfigurationen neustarten:
+Nun muss der Tor-Service noch neu gestartet werden, damit die vorgenommenen Einstellungen aktiv werden:
 
 \begin{lstlisting}
 service tor restart
 \end{lstlisting}
 
-Und um zu prüfen ob TOR auch mit den neuen Konfigurationen erfolgreich gestartet werden konnte, kann man folgendes ausführen:
+Und um zu prüfen, ob Tor erfolgreich gestartet werden konnte, kann man folgenden Befehl ausführen:
 
 \begin{lstlisting}
 service tor status
@@ -231,7 +275,13 @@ service tor status
 
 Die Ausgabe sollte ähnlich dieser sein:
 
-% FIXME: screenshot
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.7]{images/tor_service}
+\caption{Tor Service - Neustart und Status}
+\end{figure}
+
+Der Access Point und Tor sind an diesem Punkt fertig installiert und eingerichtet. Jetzt fehlt nur noch ein abschliessender Test, um sicherzustellen, dass alles so funktioniert, wie es soll.
 
 \section{IP-Adresse verifizieren}
-Mittels \url{ipchicken.com} kann die IP-Adresse ermittelt werden, mit der man sich im Internet bewegt. Diese wird einem normalerweise vom Provider zugeteilt und ändert sich nicht so schnell. Mit einem funktionierenden TOR-Setup, ändert sich das Verhalten. Dadurch, das die gesendete Abfrage drei verschiedene TOR-Server passiert, ändert sich die Urpsrungs-IP-Adresse des Paketes jedes Mal. Um dieses Verhalten zu verifizieren, muss man sich lediglich von einem Computer im normalen Netzt und einem Computer vom eigens geschaffenen Wlan-Netz mit IP-Chicken verbinden. Sind die IP-Adressen nicht identisch und steht beim Computer vom Wlan-Netzt nichts vom Provider, läuft TOR erfolgreich.
+Mittels \url{ipchicken.com} kann die IP-Adresse ermittelt werden, mit der man sich im Internet bewegt. Diese wird einem normalerweise vom Provider zugeteilt und ändert sich eher selten. Mit einem funktionierenden Tor-Setup ändert sich dieses Verhalten jedoch. Da je Anfrage ins Internet drei verschiedene Tor-Server passiert, ändert sich die Absender-IP-Adresse des Paketes jedes Mal. Die angefragte Internetseite sieht somit nie die IP-Adresse, die einem vom Provider zugeteilt wurde, sondern immer die des zuletzt passierten Tor-Servers (Exit-Node). Um die korrekte Funktionsweise des Tor-Proxys zu verifizieren, muss man lediglich von einem Computer im normalen Netzt und einem Gerät, das mittels Tor-Proxy mit dem Internet verbunden is, \textit{ipchicken} aufrufen. Die IP-Adressen und auch die sonstigen angezeigten Informationen dürfen sich nicht decken. 

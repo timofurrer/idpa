@@ -8,8 +8,11 @@
 
 Es gibt gewisse Voraussetzungen, die man bei der Auswahl der Komponenten beachten muss. Das Micro-USB Kabel für die Stromversorgung muss folgende Spezifikationen erfüllen: mind. 700mA, 5V. Die SD-Karte, auf die später das Betriebssystem geladen wird, sollte mindestens eine Kapazität von 4 Gigabyte aufweisen. Zudem muss man beachten, dass nicht jede verfügbare Karte auch tatsächlich unter dem verwendeten Betriebssystem funktioniert. Deshalb gibt es im Internet eine Liste, auf der eine Reihe kompatibler und nicht kompatibler Karten aufgeführt werden: \url{http://elinux.org/RPi\_SD\_cards\#Working\_.2F\_Non-working\_SD\_cards}.
 Das Netzwerkkabel wird verwendet, um den Raspberry Pi mit dem Internet zu verbinden. Dies kann beispielsweise über einen Switch, Router oder RJ45-Dose geschehen.
-Bei der Wahl des WiFi--Adapters ist ebenfalls Vorsicht geboten. Nicht alle im Handel erhältlichen Adapter sind mit dem Raspberry Pi kompatibel. Eine Liste von kompatiblen Adaptern gibt es hier: \url{http://elinux.org/RPi_USB_Wi-Fi_Adapters}.
-% FIXME: Allenfalls auf spezielle Treiber verweisen --> hostapd
+\\
+Bei der Wahl des WiFi--Adapters ist besonders Vorsicht geboten. Erstens sind nicht alle im Handel erhältlichen Adapter sind mit dem Raspberry Pi kompatibel. Eine Liste von kompatiblen Adaptern gibt es hier: \url{http://elinux.org/RPi_USB_Wi-Fi_Adapters}.
+Zweitens können nicht alle kompatiblen WiFi-Adapter in den Access Point-Modus versetzt werden. Das für dieses Tutorial eingesetzte Programm hostapd, welches die Access Point-Funktionalitäten zur Verfügung stellt, unterstützt nur gewisse WiFi-Adapter bzw. gewisse Treiber. man sollte sich also gut informieren bevor man sich für einen Adapter entscheidet. 
+Für dieses Tutorial wurde ein WiFi-Adapter von B-Link eingesetzt. Er wird von hostapd unterstützt und kann über \href{http://www.adafruit.com/products/1030}{adafruit} oder \href{http://www.pi-shop.ch/usb-wifi-802-11b-g-n-module-mit-antenne-fuer-raspberry-pi}{Pi-Shop} für wenig Geld erworben werden.
+\\
 \\
 Für die Einrichtung selbst wird noch zusätzliche Peripherie gebraucht, die aber in den meisten Haushalten schon vorhanden sein sollte:
 
