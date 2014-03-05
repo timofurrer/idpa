@@ -13,8 +13,8 @@ Wenn auf der erschienenen Ausgabe ein Eintrag für \textit{wlan0} zu sehen ist, 
 \caption{ifconfig - wlan0}
 \end{figure}
 
-\section{Access Point einrichten}
-Mit dem eingesteckten Netzwerkkabel und dem per USB angeschlossenen WiFi-Adapter stehen nun zwei Netzwerk-Schnittstellen zur Verfügung. Das Netzwerkkabel hat die Aufgabe, den Raspberry Pi mit dem Internet zu verbinden. Der WiFi-Adapter hingegen soll so eingerichtet werden, dass er ein lokales WLAN aufzieht. Der Raspberry Pi fungiert somit als Wireless Access Point - in deutscher Sprache so viel wie "kabelloser Zugangspunkt". Ein Access Point ermöglicht es Geräten wie Notebooks oder Smartphones, sich über ihn kabellos mit dem Internet zu verbinden. Neben der Software für den Access Point wird ein eigener DHCP-Server benögtigt. Dieser ist dafür verantwortlich, dass jeder Computer, der sich mit dem WLAN verbindet, eine valide IP-Adresse erhält und somit ein Teil des Netzes werden kann.
+\section{Access Point aufsetzen}
+Mit dem eingesteckten Netzwerkkabel und dem per USB angeschlossenen WiFi-Adapter stehen nun zwei Netzwerk-Schnittstellen zur Verfügung. Das Netzwerkkabel hat die Aufgabe, den Raspberry Pi mit dem Internet zu verbinden. Der WiFi-Adapter hingegen soll so eingerichtet werden, dass er ein lokales WLAN (Wireless Local Area Network) aufzieht. Der Raspberry Pi fungiert somit als Wireless Access Point - auf deutsch so viel wie "kabelloser Zugangspunkt". Ein Access Point ermöglicht es Geräten wie Notebooks oder Smartphones, sich über ihn kabellos mit dem Internet zu verbinden. Neben der Software für den Access Point wird ein eigener DHCP-Server benögtigt. DHCP (Dynamic Host Configuration Protocol) ist ein Protokol, das die automatische Einbindung eines Computers in ein bestehendes Netzwerk ermöglicht. Der DHCP-Server sorgt also dafür, dass jeder Computer, der sich mit dem WLAN verbindet, eine valide IP-Adresse erhält und somit ein Teil des Netzes werden kann.
 \\
 Mit den folgenden befehlen werden die benötigten Softwarekomponenten installiert.
  
@@ -24,9 +24,9 @@ apt-get install hostapd isc-dhcp-server
 
 \subsection{DHCP-Server konfigurieren}
 Damit der DHCP-Server auch richtig funktioniert, muss er zuerst konfiguriert werden.
-Dazu öffnet man die Datei \textit{/etc/dhcp/dhcpd.conf} mit einem beliebigen Texteditor. In diesem Tutorial wird dazu und für alle nachfolgenden Fälle der vorinstallierte Texteditor Nano verwendet.
+Dazu öffnet man die Datei \textit{/etc/dhcp/dhcpd.conf} mit einem beliebigen Texteditor. In diesem Tutorial wird für diesen und alle nachfolgenden Fälle der vorinstallierte Texteditor \textit{nano} verwendet.
 \\
-Mit dem folgenden Kommando wird die Textdatei mit Nano geöffnet:
+Mit dem folgenden Kommando wird die Textdatei mit \textit{nano} geöffnet:
 
 \begin{lstlisting}
 nano /etc/dhcp/dhcpd.conf
@@ -46,7 +46,7 @@ Neu sieht das Ganze folgendermassen aus:
 #option domain-name-server ns1.example.org,ns2.example.org
 \end{lstlisting}
 
-Als Nächstes muss dem DHCP-Server mitgeteilt werden, dass er der offizielle DHCP-Server des zu erstellenden WLAN-Netzes ist. Einmal eingestellt vergibt er fortan valide IP-Adressen an jeden Client, der ihn per DHCP-Request anfragt.
+Als Nächstes muss dem DHCP-Server mitgeteilt werden, dass er der offizielle DHCP-Server des zu erstellenden WLAN-Netzes ist. Einmal eingestellt vergibt er fortan valide IP-Adressen an jeden Computer, der dem Netz beitreten möchte.
 \\
 Dazu muss folgende Zeile einkommentiert - die vorangestellte Raute entfernt - werden:
 
@@ -60,7 +60,7 @@ Die Zeile sollte nun so aussehen:
 authoritative;
 \end{lstlisting}
 
-Das künftig vom WiFi-Adapter aufzuziehende WLAN, für das der DHCP-Server verantwortlich ist, muss einen eigenen Bereich zugewiesen bekommen.
+Das künftig vom WiFi-Adapter aufzuziehende WLAN muss einen eigenen Bereich zugewiesen bekommen, in dem es wirken kann.
 \\
 Dazu einfach die folgenden Zeilen ans Ende der Datei anfügen:
 
@@ -76,16 +76,16 @@ subnet 192.168.66.0 netmask 255.255.255.0 {
 }
 \end{lstlisting}
 
-Den DHCP-Server ist fertig konfiguriert. Jetzt muss er an ein Netwerkinterface (auf deutsch: Netzwerkschnittstelle) gebunden werden. Das gesuchte Netzwerkinterface ist in diesem Fall wlan0, wie man schon zu beginn mittels ``ifconfig'' herausgefunden hat.
-In der Datei \textit{/etc/default/isc-dhcp-server} muss dazu bei der Einstellung \textit{INTERFACES} wlan0 eingetragen werden:
+Der DHCP-Server ist fertig konfiguriert und muss an ein Netwerkinterface (Netzwerkschnittstelle) gebunden werden. Das gesuchte Netzwerkinterface ist in diesem Fall \textit{wlan0}, wie man schon zu beginn mittels \textit{ifconfig -a} herausgefunden hat.
+In der Datei \textit{/etc/default/isc-dhcp-server} muss dazu bei der Einstellung \textit{INTERFACES} der Wert \textit{wlan0} eingetragen werden:
 
 \begin{lstlisting}
 INTERFACES="wlan0"
 \end{lstlisting}
 
-Dem Interface \textit{wlan0} kann jetzt eine fixe IP-Adresse vergeben werden. Es handelt sich dabei um jene Adresse, die bei der Konfiguration des DHCP-Server bei \textit{option routers} angegeben wurde (192.168.66.1). 
+Dem Interface \textit{wlan0} kann jetzt eine fixe IP-Adresse vergeben werden. Es handelt sich dabei um jene Adresse, die bei der Konfiguration des DHCP-Server bei \textit{option routers} angegeben wurde - in diesem Fall also \textit{192.168.66.1}. 
 \\
-In der Datei \textit{/etc/network/interfaces} müssen folgende Zeilen auskommentiert werden:
+In der Datei \textit{/etc/network/interfaces} müssen zuerst folgende Zeilen auskommentiert werden:
 
 \begin{lstlisting}
 iface wlan0 inet manual
@@ -107,14 +107,14 @@ iface wlan0 inet static
 \caption{konfigurierte interfaces-Datei}
 \end{figure}
 
-Das Interface \textit{wlan0} läuft zu diesem Zeitpunkt bereits. Um die eben getätigten Einstellungen sofort wirksam zu machen, muss folgendes Kommando abgesetzt werden:
+Das Interface \textit{wlan0} läuft zu diesem Zeitpunkt bereits. Um die eben getätigten Einstellungen sofort wirksam zu machen, muss noch folgendes Kommando abgesetzt werden:
 
 \begin{lstlisting}
 ifconfig wlan0 192.168.66.1
 \end{lstlisting}
 
 \subsection{Hostapd konfigurieren}
-Jetzt muss der Access Point selbst konfiguriert werden. Die Konfigurationsdatei für \textit{hostapd} existiert aber noch nicht. Deshalb muss man zuerst eine erstellen:
+Nach dem DHCP-Server muss jetzt der Access Point konfiguriert werden. Die Konfigurationsdatei für \textit{hostapd} existiert aber noch nicht. Die neue Datei erstellt man mit:
 
 \begin{lstlisting}
 touch /etc/hostapd/hostapd.conf
@@ -126,7 +126,7 @@ Die Datei sollte jetzt erstellt sein und kann mit einem Texteditor geöffnet wer
 nano /etc/hostapd/hostapd.conf
 \end{lstlisting}
 
-Folgende Zeilen muss man hinzufügen:
+Folgende Zeilen müssen hinzugefügt werden:
 
 \begin{lstlisting}
 interface=wlan0
@@ -146,12 +146,12 @@ rsn_pairwise=CCMP
 
 Ein paar der obigen Werte kurz erklärt: 
 \begin{itemize}
-\item driver: Der Treiber des Wifi-Adapters
+\item driver: Der Treiber-Name des Wifi-Adapters
 \item ssid: Der Name des Netzes, wie man es nach aussen hin sieht
 \item wpa\_passphrase: Passwort für den Zugang zum Netz
 \end{itemize}
 
-\textit{hostapd} kennt diese Konfiguration noch nicht. Um diese bekanntzumachen, muss in der Datei \textit{/etc/default/hostapd} nach \textit{DAEMON\_CONF} gesucht und die Zeile wie folgt geändert werden:
+\textit{hostapd} kennt diese neue Konfiguration noch nicht. Um diese dem Programm bekanntzumachen, muss in der Datei \textit{/etc/default/hostapd} nach \textit{DAEMON\_CONF} gesucht und die Zeile wie folgt geändert werden:
 
 \begin{lstlisting}
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
@@ -166,7 +166,7 @@ NAT (Network Address Translation) wird verwendet, um die mit dem WLAN verbundene
 net.ipv4.ip_forward=1
 \end{lstlisting}
 
-Folgender Befehl macht die Einstellung aktiv:
+Folgender Befehl macht die Einstellung umgehend aktiv:
 
 \begin{lstlisting}
 echo 1 > /proc/sys/net/ipv4/ip_forward
@@ -189,13 +189,13 @@ iptables-save > /etc/iptables.ipv4.nat
 echo "up iptables-restore < /etc/iptables.ipv4.nat" >> /etc/network/interfaces
 \end{lstlisting}
 
-\section{Aufstarten von hostapd und dem DHCP-Server}
-Der Access Point ist jetzt fertig eingerichtet. Um zu überprüfen, ob man alles richtig gemacht hat, muss das Programm zusammen mit der Konfigurationsdatei aufgerufen werden:
+\section{Erster Start des Access Points}
+Der Access Point ist an diesem Punkt fast vollständig aufgesetzt. Um zu überprüfen, ob alles richtig gemacht wurde, muss man das Programm zusammen mit der Konfigurationsdatei aufrufen:
 \begin{lstlisting}
 /usr/sbin/hostapd /etc/hostapd/hostapd.conf
 \end{lstlisting}
 
-Entspricht die Ausgabe der unten Abgebildeten, kann das nachfolgende Kapitel übersprungen werden.
+Entspricht die Ausgabe der unten Abgebildeten, waren die bisherigen Schritte erfolgreich und das nachfolgende Kapitel kann übersprungen werden.
 
 \begin{figure}[h]
 \centering
@@ -204,67 +204,65 @@ Entspricht die Ausgabe der unten Abgebildeten, kann das nachfolgende Kapitel üb
 \end{figure}
 
 \subsection{Fehlerbehandlung}
-Tritt ein Fehler auf, liegt das möglicherweise an einer Inkompatibilität zwischen \textit{hostpad} und dem WiFi-Adapter bzw. dessen Treiber. Bei dem in diesem Tutorial verwendeten WiFi-Adapter kann das Problem gelöst werden, indem man \textit{hostapd} selber kompilliert. Dazu müssen mehrere Schritte befolgt werden.
-
-Zuerst lädt man von der Hersteller-Seite den Linux-Treiber herunter. Dazu geht man auf \url{http://realtek.com} und navigiert zu Downloads > Communications Network ICs > Wireless LAN ICs > WLAN NIC > IEEE 802.11b/g/n Single-Chip > Software. Dort lädt man den Linux-Treiber für den vom  WiFi-Adapter verwendeten Chipsatz herunter (hier: RTL8192CU).
+Tritt ein Fehler auf, liegt das möglicherweise an einer Inkompatibilität zwischen \textit{hostpad} und dem WiFi-Adapter bzw. dessen Treiber. Für den in diesem Tutorial verwendeten WiFi-Adapter kann das Problem gelöst werden, indem man \textit{hostapd} selber kompilliert. Dazu müssen mehrere Schritte befolgt werden.
 \\
-Den heruntergeladenen Treiber (Zip-Datei) kopiert man von einem USB-Stick in das Home-Verzeichnis des Raspberry Pi. Ist der USB-Stick am Pi angeschlossen, müssen dazu folgende Befehle abgesetzt werden:
+Achtung: Die Dateinamen und Verzeichnisse können sich je nach Fall von den hier Verwendeten unterscheiden und müssen dementsprechend angepasst werden.
+\\
+\\
+Zuerst lädt man von der Hersteller-Seite den Linux-Treiber herunter. Dazu geht man auf \url{http://realtek.com} und navigiert zu \textit{Downloads > Communications Network ICs > Wireless LAN ICs > WLAN NIC > IEEE 802.11b/g/n Single-Chip > Software}. Dort lädt man den Linux-Treiber für den vom  WiFi-Adapter verwendeten Chipsatz herunter (hier RTL8192CU).
+\\
+Den heruntergeladenen Treiber (Zip-Datei) kopiert man auf einen USB-Stick und von dort in das Home-Verzeichnis des Raspberry Pi. Ist der USB-Stick am Pi angeschlossen, müssen dazu folgende Befehle abgesetzt werden:
 
 \begin{lstlisting}
 mount /dev/sda1 /mnt
 cp /mnt/RTL8188C_8192C_USB_linux_v4.0.2_9000.20130911.zip /home/pi
+umount /dev/sda1
 \end{lstlisting} 
 
-Jetzt muss die Zip-Datei entpackt werden:
+Anschliessend entpackt man die Zip-Datei:
 
 \begin{lstlisting}
 cd /home/pi
 unzip RTL8188C_8192C_USB_linux_v4.0.2_9000.20130911.zip
 \end{lstlisting}
 
-Danach muss ins richtige Verzeichnis gewechselt und das Archiv von für hostapd entpackt werden:
+Danach wechselt man in das richtige Verzeichnis und entpackt dort das Archiv, welches \textit{hostapd} enthält:
 
 \begin{lstlisting}
 cd wpa_supplicant_hostapd
 tar -xzvf wpa_supplicant_hostapd-0.8_rtw_r7475.20130812.tar.gz
 \end{lstlisting}
 
-Danach muss erneut in das richtige Verzeichnis gewechselt werden:
+Danach wechselt man wiederum in das soeben entpackte Verzeichnis, wechselt in den Ordner namens \textit{hostapd} und startet den Kompiliervorgang:
 
 \begin{lstlisting}
-cd wpa_supplicant_hostapd-0.8_rtw_r7475.20130812
-cd hostapd
-\end{lstlisting}
-
-Im richtigen Verzeichnis angelangt kann hostapd kompiliert werden. Den Kompiliervorgang starten man mit folgendem Befehl:
-
-\begin{lstlisting}
+cd wpa_supplicant_hostapd-0.8_rtw_r7475.20130812/hostapd
 make
 \end{lstlisting}
 
-Nach ein paar Minuten Wartezeit steht die frisch kompilierte, binäre Datei bereit. Bevor diese kopiert wird, sollte die Original-Datei gesichert werden:
+Nach ein paar Minuten Wartezeit steht die frisch kompilierte, binäre Datei bereit. Diese wird in Zukunft die zu Beginn des Tutorials installierte Version ersetzen. Zuvor sollte man aber sicherheitshalber die Original-Datei sichern:
 
 \begin{lstlisting}
 mv /usr/sbin/hostapd /usr/sbin/hostapd.ORIG
 \end{lstlisting}
 
-Danach kann die neue \textit{hostapd}-Binärdatei kopiert werden:
+Anschliessend kann man die neue \textit{hostapd}-Binärdatei kopieren:
 
 \begin{lstlisting}
 cp hostapd /usr/sbin	
 \end{lstlisting}
 
-Die Dateinamen und Verzeichnisse können sich je nach Fall von den hier Verwendeten unterscheiden und müssen dementsprechend angepasst werden.
+Jetzt ist es an der Zeit, die ersten Schritte des Hauptkapitels \textit{Erster Start des Access Points} noch einmal auszuführen. Funktioniert es dieses Mal, kann mit dem nächsten Kapitel fortgefahren werden. Kommt es erneut zu Fehlern, sollten alle vorherigen Schritte genau überprüft und allenfalls die Internet-Community zu Rate gezogen werden.
 
-\subsection{Access Point testen}
-Bevor der Access Point richtig getestet werden kann, müssen alle beteiligten Komponenten gestartet werden:
+\subsection{Verbindung herstellen zum Access Point}
+Bevor man sich mit dem Access Point verbinden kann, müssen die beiden Komponenten \textit{hostapd} und \textit{isc-dhcp-server} gestartet werden:
 
 \begin{lstlisting}
 service hostapd start
 service isc-dhcp-server start
 \end{lstlisting}
 
-Das WLAN ist jetzt aktiv und für jedes WiFi-fähige Geräte erkennbar.
+Das WLAN sollte jetzt aktiv und für jedes WiFi-fähige Geräte erkennbar sein.
 
 \begin{figure}[h]
 \centering
@@ -272,23 +270,21 @@ Das WLAN ist jetzt aktiv und für jedes WiFi-fähige Geräte erkennbar.
 \caption{Der erstellte Access Point}
 \end{figure}
 
-Verhält sich der Access Point nicht wie gewünscht oder läuft gar nicht erst, empfiehlt es sich, alle vorherigen Schritte noch einmal zu studieren und die Konfigurationen zu überprüfen. Für schwer zu lösende Probleme kann man sich auch immer an die Internet-Gemeinschaft wenden.
-
 \section{Daemons einrichten}
-Beide Komponenten - hostapd und isc-dhcp-server - können als sogenannter "Daemon" eingerichtet werden. Daemons sind Programme, die beim Start des Computers automatisch aufstarten. Man will den Access Point schliesslich nicht jedes Mal manuell über die Konsole starten müssen. 
+Beide Komponenten sollten als sogenannter \textit{Daemon} eingerichtet werden. Daemons sind Programme, die bei jedem Computerstart ebenfalls gestartet werden und fortan im Hintergrund laufen. Man will den Access Point schliesslich nicht jedes Mal manuell über die Konsole starten müssen. 
 
 \begin{lstlisting}
 update-rc.d hostapd enable 
 update-rc.d isc-dhcp-server enable
 \end{lstlisting}
 
-Um die Daemons auf korrekte Funktionsweise zu überprüfen, muss man den PC neu starten:
+Um die Daemons auf korrekte Funktionsweise zu überprüfen, muss der Tor-Proxy neu gestartet werden:
 
 \begin{lstlisting}
 shutdown -r now 
 \end{lstlisting}
 
-Ist der PC wieder hochgefahren, fragt man die Stati der beiden Daemons ab:
+Ist der Computer wieder hochgefahren, fragt man die Stati der beiden Daemons ab:
 
 \begin{lstlisting}
 service hostapd status
@@ -309,8 +305,10 @@ Die Ausgabe sollte wie folgt aussehen:
 \caption{Status DHCP-Server}
 \end{figure}
 
+Verhält sich der Access Point nicht wie gewünscht oder läuft gar nicht erst, empfiehlt es sich, alle vorherigen Schritte noch einmal zu studieren und die Konfigurationen zu überprüfen. Für schwer zu lösende Probleme kann man sich auch immer an die Internet-Gemeinschaft wenden. Waren alle bisherigen Schritte erfolgreich, kann jetzt damit begonnen werden, den eigentlichen Tor-Proxy aufzusetzen.
+
 \section{Tor aufsetzen}
-An dieser Stelle ist es möglich, sich mittels Access Point mit dem Internet zu verbinden. Das Ziel ist es, die Verbindung ins Internet über das Tor-Netzwerk zu leiten. Tor kann man, wie die zuvor verwendeten Programme auch, über die Paketverwaltung installieren:
+An dieser Stelle ist es möglich, sich mittels Access Point mit dem Internet zu verbinden und loszusurfen. Das Ziel ist es aber, die Verbindung ins Internet über das Tor-Netzwerk zu leiten, um ein gewisses Mass an Anonymität zu gewährleisten. Dafür muss als erstes die entsprechende Softwarekomponente installiert werden. Tor kann man - wie die zuvor verwendeten Programme auch - über die Paketverwaltung installieren:
 
 \begin{lstlisting}
 apt-get install tor
@@ -343,7 +341,7 @@ Die Datei sollte nun folgendermassen aussehen:
 \caption{torrc-Datei}
 \end{figure}
  	
-Der Firewall muss jetzt noch beigebracht werden, dass jegliche Kommunikation vom WLAN-Netz über das Tor-Netzwerk weitergeleitet werden soll:
+Der Firewall muss jetzt noch beigebracht werden, dass jegliche Kommunikation vom WLAN ins Internet über das Tor-Netzwerk geleitet werden soll:
 
 \begin{lstlisting}
 iptables -F
@@ -359,7 +357,8 @@ iptables -t nat -A PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040
 iptables-save > /etc/iptables.ipv4.nat
 \end{lstlisting}
 
-In der \textit{torrc}-Konfigurationsdatei wurde bei \textit{Log notice file} eine Datei angegeben, die in Zukunft alle Logs enthält. Diese Datei muss nun erstellt und mit den entsprechenden Rechten versehen werden:
+\subsection{Protokollierung aktivieren}
+In der \textit{torrc}-Konfigurationsdatei wurde bei \textit{Log notice file} eine Datei angegeben, die in Zukunft alle Logs enthält. Mit \textit{Logs} sind Protokolleinträge gemeint, die von der Tor-Software erstellt werden und Auskunft über den Status und allfällige Probleme geben. Diese Datei muss erstellt und mit den entsprechenden Rechten versehen werden:
 
 \begin{lstlisting}
 touch /var/log/tor/notices.log
@@ -367,7 +366,7 @@ chown debian-tor /var/log/tor/notices.log
 chmod 644 /var/log/tor/notices.log
 \end{lstlisting}
 
-Nun muss man den Tor-Service noch neu starten, damit die vorgenommenen Einstellungen aktiv werden:
+Nun muss man den Tor-Service neu starten, damit die vorgenommenen Einstellungen aktiv werden:
 
 \begin{lstlisting}
 service tor restart
@@ -379,7 +378,7 @@ Um zu prüfen, ob Tor erfolgreich gestartet werden konnte, kann man folgenden Be
 service tor status
 \end{lstlisting}
 
-Die Ausgabe sollte ähnlich dieser sein:
+Die Ausgaben sollten wie die unten Abgebildeten aussehen.
 
 \begin{figure}[h]
 \centering
@@ -387,25 +386,38 @@ Die Ausgabe sollte ähnlich dieser sein:
 \caption{Tor - Neustart und Status}
 \end{figure}
 
-Auch Tor soll bei jedem Neustart des Systems automatisch laufen. Um Tor als Daemon zu konfigurieren, muss man analog zu vorhin folgenden Befehl absetzen:
+Auch Tor soll bei jedem Start des Systems automatisch laufen. Um Tor als Daemon zu konfigurieren, muss man analog zu vorhin folgenden Befehl absetzen:
 
 \begin{lstlisting}
 update-rc.d tor enable
 \end{lstlisting}
 
-Der Access Point und Tor sind an diesem Punkt fertig installiert und eingerichtet. Jetzt fehlt nur noch ein abschliessender Test, um sicherzustellen, dass alles so funktioniert, wie es soll.
+Der Access Point und Tor sind an diesem Punkt fertig installiert und eingerichtet. Gratuliere! Jetzt fehlt nur noch ein abschliessender Test, um sicherzustellen, dass alles so funktioniert, wie es soll.
 
 \section{IP-Adresse verifizieren}
-Mittels \url{http://wieistmeineip.ch} kann die IP-Adresse ermittelt werden, mit der man sich im Internet bewegt. Diese wird einem normalerweise vom Provider zugeteilt und ändert sich eher selten. Mit einem funktionierenden Tor-Setup ändert sich dieses Verhalten jedoch. Da je Anfrage ins Internet drei verschiedene Tor-Server passiert, ändert sich die Absender-IP-Adresse des Paketes jedes Mal. Die angefragte Internetseite sieht somit nie die IP-Adresse, die einem vom Provider zugeteilt wurde, sondern immer die des zuletzt passierten Tor-Servers - auch Exit-Node genannt. Um die korrekte Funktionsweise des Tor-Proxys zu verifizieren, muss man lediglich von einem Computer im normalen Netz und einem Gerät, das mittels Tor-Proxy mit dem Internet verbunden is, die Seite \textit{wieistmeineip} aufrufen. Die IP-Adressen und auch die sonstigen angezeigten Informationen dürfen sich bei einem funktionierende Tor-Proxy nicht decken.
+Mittels \url{http://wieistmeineip.ch} kann die IP-Adresse ermittelt werden, mit der man sich im Internet bewegt. Diese wird einem normalerweise vom Provider zugeteilt und ändert sich eher selten. Mit einem funktionierenden Tor-Setup ändert sich dieses Verhalten jedoch. Da je Anfrage ins Internet drei verschiedene Tor-Server passiert, ändert sich die Absender-IP-Adresse des Paketes jedes Mal. Die angefragte Internetseite sieht somit nie die IP-Adresse, die einem vom Provider zugeteilt wurde, sondern immer die des zuletzt passierten Tor-Servers - auch Exit-Node genannt. Um die korrekte Funktionsweise des Tor-Proxys zu verifizieren, muss man lediglich von einem Computer im normalen Netz und einem Gerät, das mittels Tor-Proxy mit dem Internet verbunden is, die Seite \textit{wieistmeineip} aufrufen. Die IP-Adressen und auch die sonstigen angezeigten Informationen dürfen sich bei einem funktionierenden Tor-Proxy nicht decken.
 
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{images/wieistmeineip}
+\caption{wieistmeineip.ch mit funktionierendem Tor-Proxy}
+\end{figure}
+
+Zusätzlich dazu kann die Seite \url{https://check.torproject.org/} besucht werden. Diese zeigt einem an, ob man mittels Tor im Internet unterwegs ist und liefert gleich noch ein paar hilfreiche Links.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{images/torcheck}
+\caption{Tor-Check}
+\end{figure}
 
 \section{Exit-Nodes konfigurieren}
-Der letzte Tor-Server auf dem Weg zum Ziel ist der Exit-Node. Er hat die Aufgabe, das Paket an das Ziel weiterzuleiten. Dazu muss er aber zuerst das Paket aus den verschiedenen Schichten auspacken - es entschlüsseln - um die Zieladresse zu lesen. Dadurch kann er unter Umständen den Inhalt des Pakets ermitteln und es mit der Empfängerinformation in einen grösseren Zusammenhang stellen. Da jeder einen solchen Exit-Node betreiben kann - gut gesinnte Privatpersonen oder Organisationen, Geheimdienste oder sonstige Kriminelle - kann man nie genau wissen, wer jetzt einen sogenannten "Bad-Exit-Node" betreibt. Glücklicherweise kann das Risiko minimiert werden. In der Tor-Konfigurationsdatei \textit{torrc} kann man festlegen, welche Exit-Nodes verwendet werden sollen. Es gibt diverse Organisationen und Verbünde, die solche Tor-Exit-Nodes betreiben und zum Gebrauch anbieten. Eine davon ist die Swiss Privacy Foundation: \url{http://privacyfoundation.ch/}.
+Will man den Tor-Proxy bzw. deren Verwendung sicherer gestalten, lohnt es sich, die zugelassenen Exit-Nodes festzulegen. Der letzte Tor-Server auf dem Weg zum Ziel ist bekanntlich der Exit-Node. Er übernimmt das versendete Paket vom vorherigen Tor-Server, entpackt es und leitet es schliesslich an die Zieladresse weiter. Entpacken bedeutet, dass er je nach verwendetem Protokoll - http oder https - alle Details des Pakets einsehen kann. Da jeder einen solchen Exit-Node betreiben kann - gut gesinnte Privatpersonen oder Organisationen, Geheimdienste oder sonstige Kriminelle - kann man nie genau wissen, wer jetzt einen sogenannten \textit{Bad-Exit-Node} betreibt. Glücklicherweise kann dieses Risiko minimiert werden. In der Tor-Konfigurationsdatei \textit{torrc} kann man festlegen, welche Exit-Nodes verwendet werden sollen und/oder nur Exit-Nodes aus gewissen Ländern zulassen. Es gibt diverse Organisationen und Verbünde, die solche Tor-Exit-Nodes betreiben und zum Gebrauch anbieten. Eine davon ist die Swiss Privacy Foundation: \url{http://privacyfoundation.ch/}.
 \\
 Um die Exit-Nodes einzuschränken bzw. nach seinen persönlichen Wünschen zu selektieren, gibts es zwei Möglichkeiten, die sich mitunter sogar kombinieren lassen: 
 
 \begin{enumerate}
-\item Angabe des "Fingerprints" (eindeutige ID) eines spezifischen Exit-Nodes
+\item Angabe des \textit{Fingerprints} (eindeutige ID) eines spezifischen Exit-Nodes
 \item Angabe eines Ländercodes, wodurch nur Exit-Nodes von diesem Land verwendet werden
 \end{enumerate}
 
@@ -419,13 +431,14 @@ Die folgenden Zeilen werden nach \textit{DNSListenAddress 192.168.66.1} angefüg
 
 \begin{lstlisting}
 StrictNodes 1
-ExitNodes Fingerprint,{Laendercode},...
+ExitNodes Fingerprint1,Fingerprint2,{Laendercode1},{Laendercode2},{Laendercode3}
 \end{lstlisting}
 
-"Fingerprint" ist eine lange Kombination aus Zahlen und Buchstaben mit einem vorangestellten \$-Zeichen. Beispielsweise hat ein von der Swiss Privacy Foundation bereitgestellter Exit-Node den Fingerprint \$944224E9413705EEAFCBAC98BF57C475EB1960C5.
+Beim Fingerprint handelt es sich um eine lange Kombination aus Zahlen und Buchstaben mit einem vorangestellten \$-Zeichen. Beispielsweise hat ein von der \textit{Swiss Privacy Foundation} bereitgestellter Exit-Node den Fingerprint \$944224E9413705EEAFCBAC98BF57C475EB1960C5.
 Zwischen den geschweiften Klammern kann ein Ländercode angegeben werden. Für Exit-Nodes aus der Schweiz müsste man \{ch\} verwenden. Man kann dabei so viele Länder angeben wie man will. 
 \\
 Wichtig ist, dass alle angegebenen Optionen (Ländercodes und Fingerprints) stets mittels Komma getrennt werden und keine Leerzeichen dazwischenstehen.
+\\
 \\
 Ein weiteres Beispiel soll ein bisschen Klarheit schaffen:
 
@@ -436,4 +449,13 @@ ExitNodes $944224E9413705EEAFCBAC98BF57C475EB1960C5,{de},{at}
 Mit dieser Einstellung werden nur deutsche und österreichische Exit-Nodes verwendet inklusive einem zu Bginn einzeln definierten Exit-Node.
 
 \section{Abschluss}
-Tor bietet noch viele andere Möglichkeiten, den Dienst den eigenen Ansprüchen anzupassen und sicherer zu machen. Details zu den unterschiedlichen Konfigurationen und Modi findet man hier: \url{https://www.torproject.org/docs/tor-manual.html.en}. Die Seite ist zur Zeit leider nur auf Englisch verfügbar. Sicherlich findet man auch im Internet allerhand Material, um die eigenen Bedürfnisse zu decken.
+Tor bietet noch viele andere Möglichkeiten, den Dienst den eigenen Ansprüchen anzupassen und sicherer zu machen. Details zu den unterschiedlichen Konfigurationen und Modi findet man hier: \url{https://www.torproject.org/docs/tor-manual.html.en}. Die Seite ist zur Zeit leider nur auf Englisch verfügbar. Es gibt zudem gewisse Verhaltensregeln, die für einen sinnvollen und sicheren Gebrauch von Tor befolgt werden sollten: 
+
+\begin{itemize}
+\item Verwendung vom verschlüsselten https-Protokoll an Stelle von http wenn immer möglich!
+\item Keine Soziale Netzwerke besuchen!
+\item Sich nirgends einloggen oder registrieren - zumindest nicht mit Daten, die Rückschlüsse auf die Identität zulassen!
+\item Cookies weitgehend deaktivieren, JavaScript deaktivieren
+\end{itemize}
+
+Achtung: Ein falscher und verantwortungsloser Gebrauch von Tor birgt mehr Gefahren, als wenn man ganz auf den Dienst verzichten würde. Deshalb sollte man sich vor Gebrauch von Tor gut über die verschiedenen Funktionen und Risiken informieren. Im Internet findet man allerhand an Material und Informationen, um sattelfest auf dem Gebiet zu werden. Ist man einmal sattelfest, steht einem sinnvollen Gebrauch von Tor nichts mehr im Weg. Viel Spass! 

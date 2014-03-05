@@ -47,6 +47,16 @@ Grosse Macht bringt auch grosse Verantwortung. Hat man unter Linux Administrator
 \item Immer sicherstellen, dass der Befehl auch wirklich richtig eingegeben wurde
 \end{itemize}
 
+Als Root-User sollte man nur dann unterwegs sein, wenn man die erweiterten Rechte für einen längeren Zeitraum benötigt, wie das in diesem Tutorial der Fall ist. Für einzelne Befehle kann auch \textit{sudo} verwendet werden. Dieses Schlüsselwort wird einfach jedem Befehl vorangestellt, der erweiterte Rechte verlangt.
+\\
+Ein Beispiel:
+
+\begin{lstlisting}
+sudo apt-get update
+\end{lstlisting}
+
+Am Ende dieses Tutorials sollten die Root-Rechte umbedingt wieder abgegeben werden. Um das zu tun reicht ein einfaches \textit{exit} in der Kommandozeile und schon ist man wieder als normaler User unterwegs.
+
 \subsection{System aktualisieren}
 Um sicher zu stellen, dass das System auf dem aktuellsten Stand ist, müssen zuerst alle installierten Pakete aktualisiert werden. Dazu müssen folgende zwei Befehle abgesetzt werden:
 
