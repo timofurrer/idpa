@@ -12,12 +12,11 @@ Dieses Werkzeug dient dazu, gewisse Grundeinstellungen vorzunehmen. Folgende Ein
 \begin{enumerate}
 \item Benutzerpasswort ändern (Change User Password)
 \item Ausweiten des Dateisystems, um den Speicher der Karte voll auszunutzen (Expand Filesystem)
-\item Standardumgebung einstellen auf ``Console Text console" (Enable Booot to Desktop/Scratch)
 \item Anpassen des Keyboardlayouts (Internationalisation Options > Change Keyboard Layout)
 \item Regionaleinstellungen auf en\_US.UTF-8 setzen (Internationalisation Options > Change Locale)
 \item Zeitregion setzen (Internationalisation Options > Change Timezone) 
 \item Raspberry Pi übertakten auf "Medium, 900MHz" (Overclock)
-\item Speicherverteilung für die GPU auf 16 begrenzen (in Megabyte, MB) (Advanced Options > A3 Memory Split)
+\item Speicherverteilung für die GPU auf 16 (Megabyte, MB) begrenzen (Advanced Options > A3 Memory Split)
 \end{enumerate}
 
 Sollte es mit den getroffenen Einstellungen zu Problemen kommen, kann das Konfigurationstool im laufenden Betrieb erneut aufgerufen werden. Folgender Befehl muss dazu in der Konsole eingegeben werden: 
@@ -38,7 +37,7 @@ Die meisten der in dieser Anleitung beschriebenen Befehle verlangen erweiterte R
 sudo su
 \end{lstlisting}
 
-Grosse Macht bringt auch grosse Verantwortung. Hat man unter Linux Administrator-Rechte (auch Root-Rechte), kann man sehr schnell sehr vieles kaputt machen. Im schlimmsten Fall muss die SD-Karte neu aufgesetzt werden. Es lohnt sich deshalb, ein paar wenige Regeln zum Gebrauch der Konsole zu beachten: 
+Grosse Macht bringt auch grosse Verantwortung. Hat man unter Linux Administrator-Rechte (auch Root-Rechte genannt), kann man sehr schnell sehr vieles kaputt machen. Im schlimmsten Fall muss die SD-Karte neu aufgesetzt werden. Es lohnt sich deshalb, ein paar wenige Regeln zum Gebrauch der Konsole zu beachten: 
 
 \begin{itemize}
 \item Ein Befehl wird mittels Drücken der ``Enter-Taste" abgesetzt
@@ -55,17 +54,17 @@ Ein Beispiel:
 sudo apt-get update
 \end{lstlisting}
 
-Am Ende dieses Tutorials sollten die Root-Rechte umbedingt wieder abgegeben werden. Um das zu tun reicht ein einfaches \textit{exit} in der Kommandozeile und schon ist man wieder als normaler User unterwegs.
+Am Ende dieses Tutorials sollten die Root-Rechte unbedingt wieder abgegeben werden. Um das zu tun, reicht ein einfaches \textit{exit} in der Kommandozeile und schon ist man wieder als normaler User unterwegs.
 
 \subsection{System aktualisieren}
-Um sicher zu stellen, dass das System auf dem aktuellsten Stand ist, müssen zuerst alle installierten Pakete aktualisiert werden. Dazu müssen folgende zwei Befehle abgesetzt werden:
+Um sicherzustellen, dass das System auf dem aktuellsten Stand ist, müssen zuerst alle installierten Pakete aktualisiert werden. Dazu müssen folgende zwei Befehle abgesetzt werden:
 
 \begin{lstlisting}
 apt-get update
 apt-get upgrade
 \end{lstlisting}
 
-Nach der Eingabe von ``apt-get upgrade" fragt das Terminal noch einmal nach, ob man die neuen, zur Verfügung stehenden Pakete wirklich installieren will. Standardmässig ist die Antwort auf "Ja" eingestellt, was man an dem grossen Y in [Y/n] erkennt. Um fortzufahren reicht ein erneutes Drücken der ``Enter-Taste". Zukünftige Rückfragen bei abgesetzten Befehlen können auf die gleiche Weise behandelt werden. Es empfiehlt sich dennoch, die angezeigte Meldungen (Informationen, Warnungen) immer durchzulesen und entsprechend zu handeln.
+Nach der Eingabe von \textit{apt-get upgrade} fragt das Terminal noch einmal nach, ob man die zur Verfügung stehenden Pakete wirklich installieren will. Standardmässig ist die Antwort auf \textit{Ja} eingestellt, was man an dem grossen Y in \textit{[Y/n]} erkennt. Um fortzufahren reicht ein erneutes Drücken der Enter-Taste. Zukünftige Rückfragen bei abgesetzten Befehlen können auf die gleiche Weise behandelt werden. Es empfiehlt sich dennoch, die angezeigte Meldungen (Informationen, Warnungen) immer durchzulesen und entsprechend zu handeln.
 
 \begin{figure}[h]
 \centering
