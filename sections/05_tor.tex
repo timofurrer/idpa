@@ -1,17 +1,46 @@
 \newpage
-\section{Surfen im Internet - Wer sieht wem über die Schulter?}
-Wenn man sich im Internet bewegt, ist man grundsätzlich immer eindeutig erkennbar. Die sogenannte IP-Adresse, eine Zahlenfolge mit Punkten in Blöcke aufgeteilt, repräsentiert den Menschen dahinter. Sie ist immer eindeutig und wird einem vom Provider (z.B. Swisscom) zugeteilt. Wenn man im Internet beispielsweise straffällig wird und die Behörden davon Wind bekommen, kann es sein, dass sie einen sehr einfach aufspüren. Sie brauchen dazu lediglich die IP-Adresse, die man vielleicht irgendwo unabsichtlich hinterlassen hat. Je nach Gesetzesgrundlage ist der Provider dazu verpflichtet, die zur IP-Adresse passenden Personendaten auszuhändigen, wenn die Polizei danach fragt. Und schon hat's einen erwischt. Ist man schuldig, ist das Vorgehen der Polizei auch nicht weiter zu verurteilen. Schliesslich ist es nicht das Ziel, dass das Internet offiziell rechtsfreier Raum wird. Was aber, wenn man nichts Böses im Schilde führt, es aber trotzdem Parteien gibt (Geheimdienste, Werbeunternehmen, Privatpersonen, etc.), die einen über die IP-Adresse belauschen oder gar identifizieren, um dann was auch immer mit den gewonnenen Erkenntnissen anzustellen? Privatsphäre im Internet gibt es nicht standardmässig mitgeliefert, dazu muss man schon selbst etwas tun. Hier kommt Tor ins Spiel. Es gibt noch diverse andere Möglichkeiten, seine Spuren im Internet zu verwischen bzw. gar nicht erst Spuren zu hinterlassen. In dieser Arbeit wird der Fokus aber auf Tor gelegt.
+\section{Surfen im Internet - Wie anonym ist anonym?}
+Wenn man im Internet unterwegs ist - beispielsweise auf der Webseite einer grossen Zeitung - hat man grundsätzlich das Gefühl, alleine zu sein.
+Man sitzt vor dem Computer, Tablet oder Smartphone und bedient den Webbrowser, der einem im Gegenzug die Informationen liefert, die man angefragt hat.
+Abgesehen von Freunden oder sonstigen Leuten, die einem vielleicht über die Schulter schauen, scheint man privat unterwegs zu sein.
+Diese Annahme ist aber falsch, denn das Internet ist sich sehr wohl darüber bewusst, wer wann wo unterwegs ist.
+Um zu verstehen, wie man anonymer surfen kann, müssen zuerst gewisse Bestandteile und Funktionsweisen des Internets bekannt sein.
+\\
+Kleine Anmerkung am Rande: Mit Internet ist das \textit{World Wide Web} - kurz WWW - gemeint. Dies schliesst beispielsweise E-Mail nicht mit ein.
 
-\subsection{Was ist Tor?}
+\subsection{IP-Adressen und Domänennamen}
+Das Internet besteht aus millionen von Computern und anderen Geräten, die miteinander vernetzt sind.
+Auch der private Computer mit Internetzugang, den man für tägliche Arbeiten benutzt, ist ein Teil davon.
+Jedes dieser Geräte hat nach aussen hin einen eindeutigen Identifikator, die sogenannte IP-Adresse.
+Die IP-Adresse besteht aus mehreren Blöcken, die wiederum aus Zahlen - und in Zukunft auch Buchstaben - bestehen.
+Sie ist dabei immer eindeutig und wird einem vom Provider (z.B. Swisscom) zugeteilt.
+Eine IPv4-Adresse - hier frei erfunden - könnte folgendermassen aussehen: 143.39.238.12
+Die IP-Adresse wird aber nicht nur Privatanwendern zugewiesen, damit diese sich im Internet bewegen können.
+Auch hinter \textit{\url{www.google.ch}} steckt eine IP-Adresse und genau so verhält es sich mit allen anderen Webseiten im Internet. 
+Jede Webseite liesse sich also über die IP-Adresse ansprechen, sofern diese bekannt ist.
+Da sich Menschen Namen aber deutlich leichter merken können, als Abfolgen von Zahlen, hat man das \textit{Domain Name System} - kurz DNS - eingeführt.
+Das DNS ist ein Verzeichnisdienst, der den Namensraum des Internets verwaltet und ist weltweit auf tausende von Server (Computer) verteilt.
+Er hat die Aufgabe, sogenannte \textit{Domänennamen} - z.B. google.ch- in die zugehörigen IP-Adressen umzuwandeln\footnote{https://de.wikipedia.org/wiki/Domain\_Name\_System}.
+Aus den obigen Erklärungen lässt sich ableiten, dass hinter einer Webseite auch immer ein Computer bzw. Server befinden muss. 
+Wenn es um Privatsphäre und Anonymität geht, stellen sich hier gleich mehrere Fragen: Wem gehört dieser Server? Ist der Besitzer des Servers gleichzeitig auch Administrator? Welche Informationen speichert der Server über seine Nutzer und gibt diese weiter? Welche Informationen können vom Server überhaupt eingesehen werden?
+
+\subsection{Verbindungsdaten anonymisieren mit Tor}
+Zu den Spuren, die man im Internet hinterlässt, gehören unter anderem die IP-Adresse und damit zusammenhängend Informationen zum Provider und dessen Niederlassung. 
+Auch Informationen zum Browser inklusive dem verwendeten Betriebssystem können oft von den passierten Servern eingesehen werden. 
+Es gibt noch vielde andere Techniken und Technologien, die es Servern erlauben, Nutzerinformationen abzuschöpfen. 
+In diesem Kapitel liegt der Fokus aber auf den Verbindungsdaten - IP-Adressen - und deren Anonymisierung. 
+Und hier kommt Tor ins Spiel. 
 Tor, ein Akronym für The Onion Routing, ist ein Netzwerk, welches geschaffen wurde, um Verbindungsdaten zu anonymisieren. Man kann es für das Durchstöbern des Internets, E-Mail-Verkehr, diverse Chats und anderes einsetzen. Die Nutzung ist frei und für jedermann möglich, es sei denn, der Staat schränkt diese ein, wie es beispielsweise in China der Fall ist\footnote{http://www.technologyreview.com/view/427413/how-china-blocks-the-tor-anonymity-network/}.
-Die Entwicklungen an Tor begannen 2002 an der Universität in Cambridge und dauern bis heute an. Global betrachtet nutzt wohl nur ein kleiner Teil der Leute Tor, da es erstens nicht sehr bekannt ist und zweitens die Nutzung mit einem gewissen Mehraufwand verbunden ist, der zusätzliches technisches Know-How verlangt. Im Rahmen der Enthüllungen von Edward Snowden über die zweifelhaften Aktivitäten von Geheimdiensten weltweit hat Tor aber an Bedeutung gewonnen. Die kritischen Stimmen wurden jedoch ebenfalls lauter und das zu Recht.
+Die Entwicklungen an Tor begannen 2002 an der Universität in Cambridge und dauern bis heute an. Global betrachtet nutzt wohl nur ein kleiner Teil der Leute Tor, da es erstens nicht sehr bekannt ist und zweitens die Nutzung mit einem gewissen Mehraufwand verbunden ist, der zusätzliches technisches Know-How verlangt. Im Rahmen der Enthüllungen von Edward Snowden hat Tor aber an Bedeutung und Verbreitung gewonnen. Die kritischen Stimmen wurden jedoch ebenfalls lauter und das zu Recht.
 
 \subsection{Der zweifelhafte Ruf von Tor}
 Tor hat einen zweifelhaften Ruf, der einen potenziellen Nutzer zwiegespalten zurücklassen kann. Es heisst oft, dass im Tor-Netzwerk verstärkt illegaler Handel getrieben wird. Dies betrifft den Handel mit Drogen, Waffen und auch Kinderpornographie.\footnote{\url{http://www.zeit.de/digital/internet/2013-10/darknet-tor-netzwerk-vice}} \footnote{\url{http://www.nzz.ch/aktuell/digital/freedom-hosting-eric-eoin-marques-tor-1.18127905}}
 Der negative Ruf von Tor nimmt die unterschiedlichsten Formen an und vieles davon kann durchaus wahr sein. Möchte man als gewissenhafter Nutzer tatsächlich mit solchen Machenschaften in Verbindung gebracht werden? Was zu dem Ganzen noch hinzukommt ist die fast schon ironische Finanzierung des Projektes. So wird Tor bis heute von militärischen Organisationen der USA sowie der US-amerikanischen Regierung  gestützt.
 \footnote{\url{https://de.wikipedia.org/wiki/Tor_\%28Netzwerk\%29\#Geschichte}}
 \footnote{\url{http://www.heise.de/security/meldung/Neue-Diskussion-ueber-Finanzierung-des-Tor-Projektes-1955851.html}}
-Dies grenzt beinahe schon an Ironie, sind es doch die amerikanischen Geheimdienste, die das Internet im grössten Masse aushorchen. Die Frage, die sich dadurch stellt ist die folgende: "Kann man überhaupt noch auf die anonyme Funktionsweise von Tor vertrauen oder muss man davon ausgehen, dass amerikanische Geheimdienste das Netzwerk bewusst aufgebaut haben, um jeden abzuhören, der offenbar etwas zu verstecken hat?" Kürzlich ist bekannt geworden, dass die Bemühungen der NSA, Nutzer vom Tor-Netzwerk gezielt zu de-anonymisieren, sehr ineffizient sind.\footnote{\url{http://www.heise.de/security/meldung/Neues-von-der-NSA-Tor-stinkt-1972983.html}}
+Dies grenzt beinahe schon an Ironie, sind es doch die amerikanischen Geheimdienste, die das Internet im grössten Masse aushorchen. Die Frage, die sich deshalb aufdrängt ist die folgende: "Kann man überhaupt noch auf die anonyme Funktionsweise von Tor vertrauen oder muss man davon ausgehen, dass amerikanische Geheimdienste das Netzwerk bewusst aufgebaut haben, um jeden abzuhören, der offenbar etwas zu verstecken hat?" 
+\\
+Kürzlich ist bekannt geworden, dass die Bemühungen der NSA, Nutzer vom Tor-Netzwerk gezielt zu de-anonymisieren, sehr ineffizient sind.\footnote{\url{http://www.heise.de/security/meldung/Neues-von-der-NSA-Tor-stinkt-1972983.html}}
 Das macht ein kleines bisschen Hoffnung. Ist Tor vielleicht doch nicht so schlecht?
 
 \subsection{Wie funktioniert Tor?}
@@ -19,16 +48,16 @@ Der Name ``The Onion Routing'' kommt nicht von ungefähr. Die verwendete Anonymi
 \begin{itemize}
 \item Client: Computerprogramm, das auf dem Rechner des Nutzers installiert und verwendet wird
 \item Tor-Server: Rechner im Tor-Netz, dessen Aufgabe es ist, Daten bzw. Anfragen zu empfangen und diese anschliessend an einen neuen Tor-Server weiterzuleiten
-\item Entry-Guard: Erster Tor-Server in der Kaskade, der die Daten bzw. die Anfrage direkt vom Nutzer bekommt und somit noch kennt
+\item Entry-Guard: Erster Tor-Server in der Kaskade, der die Daten bzw. die Anfrage direkt vom Nutzer bekommt und diesen somit noch kennt
 \item Exit-Node: Letzter Tor-Server in der Kaskade, der als Endpunkt auftritt und die Daten bzw. die Anfrage an das gewünschte Ziel weiterleitet
 \end{itemize}
 
-Im Folgenden werden die verschiedenen Stationen bzw. Phasen der Prozedur genauer beschrieben. Man bekommt vielleicht das Gefühl, dass der Ablauf zeitintensiv und aufwendig ist. Tatsächlich handelt es sich aber von Start bis Ende des Ablaufs lediglich um Millisekunden bzw. Sekunden. Das Ganze hängt natürlich auch immer von der eigenen Verbindungsgeschwindigkeit und der konkrekten Anwendung ab.
+Im Folgenden werden die verschiedenen Stationen bzw. Phasen der Prozedur genauer beschrieben. Man bekommt vielleicht das Gefühl, dass der Ablauf zeitintensiv und aufwendig ist. Tatsächlich handelt es sich aber von Start bis Ende des Ablaufs lediglich um Millisekunden bzw. Sekunden. Das Ganze hängt natürlich auch immer von der eigenen Verbindungsgeschwindigkeit, der konkreten Anwendung und der Performanz des Tor-Netzwerks ab.
 
 \begin{enumerate}
 \item Um Tor überhaupt nutzen zu können, muss als erstes der  Client (Onion-Proxy) installiert werden.
-\item Der Client verbindet sich mit dem Tor-Netzwerk und lädt sich zuerst eine Liste mit allen nutzbaren Tor-Servern herunter.
-\item Ist die Liste komplett, wählt der Client eine zufällige Route über die Tor-Server.
+\item Der Client verbindet sich beim Start mit dem Tor-Netzwerk und lädt eine Liste mit allen nutzbaren Tor-Servern herunter.
+\item Ist die Liste komplett, entscheidet sich der Client für eine zufällige Route über die Tor-Server.
 \item Er baut nun eine verschlüsselte Verbindung mit dem ersten Tor-Server (Entry-Guard) der Route auf. Der Entry-Guard wählt nun seinerseits einen neuen zufälligen Tor-Server und schickt die Daten an diesen weiter.
 \item Dieser tut genau das gleiche noch einmal, worauf die Daten schliesslich zum letzten Server (Exit-Node) kommen.
 \item Der Exit-Node leitet die Daten nun zum gewünschten Ziel weiter. Das ist die einzige Strecke im ganzen Ablauf, auf der die Daten nicht mehr verschlüsselt weitergeleitet werden.\footnote{\url{https://www.torproject.org/about/overview.html.en\#thesolution}}
@@ -71,8 +100,22 @@ Nachteile
 \item starker Zusammenhang mit amerikanischen Behörden (finanz. Unterstützung)
 \end{itemize}
 
-\subsection{Versuchsbeschreibung}
-Hier wird der Versuch, Tor einzurichten und zu gebrauchen, geschildert und auf unsere Resultate eingegangen (inklusive Fazit?)
+\subsection{Experiment}
+
+\subsubsection{Zielsetzung}
+Das Ziel war es, einen Computer in einen Access Point umzuwandeln und auf diesem Tor aufzusetzen.
+Der Access Point hat dabei die Aufgabe, jedes Gerät, das sich mit ihm verbindet, über das Tor-Netzwek ins Internet weiterzuleiten und so eine Anonymisierung der Verbindungsdaten zu ermöglichen.
+Als Computer kam ein Raspberry Pi zum Einsatz.
+Es handelt sich dabei um einen Einplatinen-Computer mit beschränkten Ressourcen, der sich vor allem wegen seiner geringen Grösse sehr gut für dieses Experiment eignete.
+Einzelheiten dazu sind im Handbuch beschrieben.
+Als Betriebssystem wurde eine für den Pi angepasste Version von Debian mit dem Namen Raspbian verwendet.
+Es handelt sich dabei um eine Linux-Distribution, die jedermann frei herunterladen und benutzen kann.
+
+\subsubsection{Installation}
+Die erste Hürde bei dem Experiment war die Wahl des WLAN-Adapters, welcher für die Access Point-Funktionalität benötigt wird. Nicht jeder Adapter kann in den \textit{Access Point Mode} versetzt werden, weshalb zuerst ein kompatibles Gerät ausfindig gemacht und bestellt werden musste. Die restlichen Komponenten, die vor allem für den Betrieb des Raspberry Pis gebraucht werden, waren bereits vorhanden und schnell eingerichtet. Die Installation selbst ging ziemlich schnell von statten. Man kann diese grob in zwei Schritte aufteilen. Der erste Schritt, das Einrichten des Raspberry Pis als Access Point, ist der aufwendigere der beiden und es gab diverse Konfigurationen, die vorgenommen werden mussten. Der zweite Schritt, das Installieren und Einrichten von Tor, war schnell erledigt und stellte keine grossen Probleme mehr dar. Allgemein ist die Installation kein grosse Problem, da es im Internet eine Menge Anleitungen und Hilfestellungen gibt, auf die man zurückgreifen kann. Beim anschliessenden Testen des Tor Access Points ..... % FIXME: Fortfahren
+
+\subsubsection{Fazit}
+
 
 %Quellen:
 %https://de.wikipedia.org/wiki/Tor_\%28Netzwerk\%29
