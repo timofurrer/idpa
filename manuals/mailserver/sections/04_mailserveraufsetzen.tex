@@ -4,9 +4,9 @@
 Die IP-Adresse, durch welche der Computer im Netz eindeutig identifiziert wird, sieht möglicherweise nach jedem Computerstart anders aus. Damit der Router im Heimnetzwerk später weiss, wohin er die einkommenden Mails weiterleiten muss, sollte die IP-Adresse statisch festgelegt werden.
 \\
 \\
-Zuerst muss die Netwerkkonfigurationsdatei unter ``/etc/network/interfaces'' angepasst werden.
+Zuerst muss die Netwerkkonfigurationsdatei unter \textit{etc/network/interfaces} angepasst werden.
 \\
-Dazu muss man die Datei mit einem Texteditor öffnen. Dazu kann der vorinstallierte Texeditor ``Nano" verwendet werden:
+Dazu muss man die Datei mit einem Texteditor öffnen. Dazu kann der vorinstallierte Texeditor \textit{Nano} verwendet werden:
 
 \begin{lstlisting}
 sudo nano /etc/network/interfaces
@@ -35,7 +35,7 @@ network 192.168.1.0
 broadcast 192.168.1.255
 \end{lstlisting}
 
-Die verwendete IP-Adresse in der zweiten Zeile (192.168.1.107) sollte durch die aktuelle IP-Adresse des Systems ersetzt werden. Diese kann mit dem Kommando ``ifconfig'' ermittelt werden. Sie steht auf der zweiten Zeile bei ``eth0" unter ``inet addr:".
+Die verwendete IP-Adresse in der zweiten Zeile (192.168.1.107) sollte durch die aktuelle IP-Adresse des Systems ersetzt werden. Diese kann mit dem Kommando \textit{ifconfig} ermittelt werden. Sie steht auf der zweiten Zeile bei \textit{eth0} unter \textit{inet addr:}.
 
 \begin{figure}[h]
 \centering
