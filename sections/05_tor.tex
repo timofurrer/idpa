@@ -48,7 +48,7 @@ Welche Informationen speichern die Server über seine Nutzer und geben sie diese
 Welche Informationen können von den Server überhaupt eingesehen werden?
 \\
 Lediglich die letzte Frage lässt sich klar beantworten.
-Diese verweist auch auf die Möglichkeiten, die mant hat, die Privatsphäre im Internet zu erhöhen.
+Diese verweist auch auf die Möglichkeiten, die man hat, die Privatsphäre im Internet zu erhöhen.
 Zu den Spuren, die man im Internet hinterlässt, gehören unter anderem die IP-Adresse und damit zusammenhängend Informationen zum Provider und dessen Niederlassung.
 Auch Informationen zum Browser inklusive dem verwendeten Betriebssystem können oft von den passierten Servern eingesehen werden.
 Es gibt darüber hinaus viele verschiedene Technologien und Techniken, die es Servern erlauben, Nutzerinformationen abzuschöpfen (z.B. Cookies).
@@ -63,7 +63,7 @@ Die Entwicklungen an Tor begannen 2002 an der Universität in Cambridge und daue
 Global betrachtet nutzt wohl nur ein kleiner Teil der Leute Tor, da es erstens nicht sehr bekannt ist und zweitens die Nutzung mit einem gewissen Mehraufwand verbunden ist, der zusätzliches technisches Know-How verlangt. Im Rahmen der Enthüllungen von Edward Snowden hat Tor aber an Bedeutung und Verbreitung gewonnen. Die kritischen Stimmen wurden jedoch ebenfalls lauter und das zu Recht.
 
 \subsection{Der zweifelhafte Ruf von Tor}
-Tor hat einen zweifelhaften Ruf, der einen potenziellen Nutzer möglicherweise zwiegespalten zurücklässt.
+Tor hat einen zweifelhaften Ruf, der einen potenziellen Nutzer möglicherweise zwiegespalten zurück lässt.
 Es heisst oft, dass im Tor-Netzwerk auf Grund der Anonymisierung verstärkt illegaler Handel getrieben wird.
 Dies betrifft den Handel mit Drogen, Waffen und auch Kinderpornographie.\footnote{\url{http://www.zeit.de/digital/internet/2013-10/darknet-tor-netzwerk-vice}} \footnote{\url{http://www.nzz.ch/aktuell/digital/freedom-hosting-eric-eoin-marques-tor-1.18127905}}
 Möchte man als gewissenhafter Nutzer tatsächlich mit solchen Tätigkeiten in Verbindung gebracht werden?
@@ -99,7 +99,7 @@ Im Folgenden werden die verschiedenen Stationen bzw. Phasen der Prozedur genauer
 \end{enumerate}
 
 Die versendeten Daten werden im Laufe der Kaskade in mehrere Verschlüsselungsschichten verpackt, damit die passierten Tor-Server nicht sehen können, worum es sich dabei handelt. Daher kommt auch der Name der Prozedur. Der finale Aufbau des Pakets gleicht einer Zwiebel mit mehreren Schichten, die  schlussendlich wieder entpackt werden müssen. Diese Aufgabe übernimmt dann, wie schon erwähnt, der Exit-Node. Generell gilt, dass die Daten immer drei Tor-Server passieren. Da die Tor-Server jeweils nur die Rechner links und rechts von sich kennen, weiss nur der erste Tor-Server über die Identität des Nutzers Bescheid. Der dritte und letzte Tor-Server kennt dann nur noch den Tor-Server, der ihm die Daten weitergeleitet hat, die Daten selbst und das finale Ziel.\footnote{\url{https://de.wikipedia.org/wiki/Onion-Routing\#Verschl.C3.BCsselungsschema}}
-Die zufällig gewählte Route wird vom Tor-Client ungefährt alle zehn Minuten gewechselt. So soll eine möglichst hohe Sicherheit gewährleistet werden. Gefährlich wird es für den Nutzer dann, wenn jemand Eintritts- und Austrittsknoten kontrolliert. Die Anonymität wäre dann aufgehoben, da der \textit{Lauscher} Ursprung, Ziel und Inhalt der Daten kennt.
+Die zufällig gewählte Route wird vom Tor-Client ungefähr alle zehn Minuten gewechselt. So soll eine möglichst hohe Sicherheit gewährleistet werden. Gefährlich wird es für den Nutzer dann, wenn jemand Eintritts- und Austrittsknoten kontrolliert. Die Anonymität wäre dann aufgehoben, da der \textit{Lauscher} Ursprung, Ziel und Inhalt der Daten kennt.
 
 \begin{figure}[h]
 \centering
@@ -155,7 +155,7 @@ Es handelt sich dabei um eine Linux-Distribution, die jedermann frei herunterlad
 Die erste Hürde bei dem Experiment war die Wahl des WLAN-Adapters, welcher für die Access Point-Funktionalität benötigt wird. Nicht jeder Adapter kann in den \textit{Access Point Mode} versetzt werden, weshalb zuerst ein kompatibles Gerät ausfindig gemacht und bestellt werden musste. Die restlichen Komponenten, die vor allem für den Betrieb des Raspberry Pis gebraucht werden, waren bereits vorhanden und schnell eingerichtet. Die Installation selbst ging funktionierte ohne grosse Probleme. Man kann diese grob in zwei Schritte aufteilen. Der erste Schritt, das Einrichten des Raspberry Pis als Access Point, ist der aufwendigere der beiden und es gab diverse Konfigurationen, die vorgenommen werden mussten. Der zweite Schritt, das Installieren und Einrichten von Tor, war schnell erledigt und stellte keine grossen Probleme mehr dar. Allgemein ist die Installation kein grosse Problem, da es im Internet eine Menge Anleitungen und Hilfestellungen gibt, auf die man zurückgreifen kann. Beim anschliessenden Testen des Tor Access Points wurde noch die eine oder andere Einstellungsmöglichkeit entdeckt, die die Sicherheit von Tor zusätzlich erhöhen.
 
 \subsubsection{Fazit}
-Das Einrichten von Tor war gut bewältigbar und spannend dazu. Anhand von Hilfestellungen und Anleitungen im Internet liessen sich auch die oben beschriebenen Probleme lösen. Die angeschaffte Hardware - Raspberry Pi und zubehör - kostete knapp unter 100 Franken. Wenn man Tor ausprobieren möchte, ohne die Software auf seinem Produktivsystem zu installieren, sollte auf diese Variante zurückgreifen. Mehr Informationen dazu finden sich im Handbuch.
+Das Einrichten von Tor war gut bewältigbar und spannend dazu. Anhand von Hilfestellungen und Anleitungen im Internet liessen sich auch die oben beschriebenen Probleme lösen. Die angeschaffte Hardware - Raspberry Pi und Zubehör - kostete knapp unter 100 Franken. Wenn man Tor ausprobieren möchte, ohne die Software auf seinem Produktivsystem zu installieren, sollte auf diese Variante zurückgreifen. Mehr Informationen dazu finden sich im Handbuch.
 \\
 An dieser Stelle kann der Einsatz von Tor nicht uneingeschränkt empfohlen werden. Dazu gibt es schlicht zu viele Ungereimtheiten. Ausprobieren und Kennenlernen lohnt sich aber allemal. Man kann viel dabei lernen und evtl. gibt es in Zukunft klarere Antworten auf die vielen Fragen, die sich im Zusammenhang mit Tor stellen. Es gibt zudem Möglichkeiten, bestimmte Risiken zu minimieren. Auch dazu findet man detaillierte Informationen im Handbuch.
 \\
