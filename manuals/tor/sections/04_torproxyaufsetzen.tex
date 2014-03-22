@@ -7,7 +7,7 @@ ifconfig -a
 
 Wenn auf der erschienenen Ausgabe ein Eintrag für \textit{wlan0} zu sehen ist, kann mit der Einrichtung des Access Points begonnen werden.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.7]{images/ifconfig}
 \caption{ifconfig - wlan0}
@@ -101,7 +101,7 @@ iface wlan0 inet static
   netmask 255.255.255.0
 \end{lstlisting}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.7]{images/network_interfaces}
 \caption{konfigurierte interfaces-Datei}
@@ -197,7 +197,7 @@ Der Access Point ist an diesem Punkt fast vollständig aufgesetzt. Um zu überpr
 
 Entspricht die Ausgabe der unten Abgebildeten, waren die bisherigen Schritte erfolgreich und das nachfolgende Kapitel kann übersprungen werden.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.7]{images/hostapd_firststart}
 \caption{hostapd- Ausgabe vom Erststart}
@@ -264,7 +264,7 @@ service isc-dhcp-server start
 
 Das WLAN sollte jetzt aktiv und für jedes WiFi-fähige Geräte erkennbar sein.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.7]{images/accesspoint}
 \caption{Der erstellte Access Point}
@@ -293,13 +293,13 @@ service isc-dhcp-server status
 
 Die Ausgabe sollte wie folgt aussehen: 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.7]{images/hostapd_status}
 \caption{Status Access Point}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.7]{images/dhcp_status}
 \caption{Status DHCP-Server}
@@ -335,7 +335,7 @@ DNSListenAddress 192.168.66.1
 
 Die Datei sollte nun folgendermassen aussehen: 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{images/torrc}
 \caption{torrc-Datei}
@@ -380,7 +380,7 @@ service tor status
 
 Die Ausgaben sollten wie die unten Abgebildeten aussehen.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.7]{images/tor_service}
 \caption{Tor - Neustart und Status}
@@ -397,7 +397,7 @@ Der Access Point und Tor sind an diesem Punkt fertig installiert und eingerichte
 \section{IP-Adresse verifizieren}
 Mittels \url{http://wieistmeineip.ch} kann die IP-Adresse ermittelt werden, mit der man sich im Internet bewegt. Diese wird einem normalerweise vom Provider zugeteilt und ändert sich eher selten. Mit einem funktionierenden Tor-Setup ändert sich dieses Verhalten jedoch. Da je Anfrage ins Internet drei verschiedene Tor-Server passiert, ändert sich die Absender-IP-Adresse des Paketes jedes Mal. Die angefragte Internetseite sieht somit nie die IP-Adresse, die einem vom Provider zugeteilt wurde, sondern immer die des zuletzt passierten Tor-Servers - auch Exit-Node genannt. Um die korrekte Funktionsweise des Tor-Proxys zu verifizieren, muss man lediglich von einem Computer im normalen Netz und einem Gerät, das mittels Tor-Proxy mit dem Internet verbunden is, die Seite \textit{wieistmeineip} aufrufen. Die IP-Adressen und auch die sonstigen angezeigten Informationen dürfen sich bei einem funktionierenden Tor-Proxy nicht decken.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.4]{images/wieistmeineip}
 \caption{wieistmeineip.ch mit funktionierendem Tor-Proxy}
@@ -405,7 +405,7 @@ Mittels \url{http://wieistmeineip.ch} kann die IP-Adresse ermittelt werden, mit 
 
 Zusätzlich dazu kann die Seite \url{https://check.torproject.org/} besucht werden. Diese zeigt einem an, ob man mittels Tor im Internet unterwegs ist und liefert gleich noch ein paar hilfreiche Links.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.4]{images/torcheck}
 \caption{Tor-Check}
