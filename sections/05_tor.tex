@@ -65,15 +65,15 @@ Global betrachtet nutzt wohl nur ein kleiner Teil der Leute Tor, da es erstens n
 \subsection{Der zweifelhafte Ruf von Tor}
 Tor hat einen zweifelhaften Ruf, der einen potenziellen Nutzer möglicherweise zwiegespalten zurück lässt.
 Es heisst oft, dass im Tor-Netzwerk auf Grund der Anonymisierung verstärkt illegaler Handel getrieben wird.
-Dies betrifft den Handel mit Drogen, Waffen und auch Kinderpornographie.\footnote{\url{http://www.zeit.de/digital/internet/2013-10/darknet-tor-netzwerk-vice}} \footnote{\url{http://www.nzz.ch/aktuell/digital/freedom-hosting-eric-eoin-marques-tor-1.18127905}}
+Dies betrifft den Handel mit Drogen, Waffen und auch Kinderpornographie.\footnote{Link 23, Linkverzeichnis, Zeit} \footnote{Link 24, Linkverzeichnis, NZZ}
 Möchte man als gewissenhafter Nutzer tatsächlich mit solchen Tätigkeiten in Verbindung gebracht werden?
 Was den zweifelhaften Ruf von Tor noch verstärkt, ist die Finanzierung des Projektes.
 So wird die Weiterentwicklung von Tor bis heute zu grossen Teilen von militärischen Organisationen der USA sowie der US-amerikanischen Regierung  unterstützt.
-\footnote{\url{https://de.wikipedia.org/wiki/Tor_\%28Netzwerk\%29\#Geschichte}}
-\footnote{\url{http://www.heise.de/security/meldung/Neue-Diskussion-ueber-Finanzierung-des-Tor-Projektes-1955851.html}}
+\footnote{Link 25, Linkverzeichnis, Wikipedia}
+\footnote{Link 26, Linkverzeichnis, heise}
 Dies grenzt beinahe schon an Ironie, sind es doch die amerikanischen Geheimdienste, die das Internet im grössten Masse aushorchen. Die Frage, die sich deshalb aufdrängt ist die Folgende: "Kann man überhaupt noch auf die anonyme Funktionsweise von Tor vertrauen oder muss man davon ausgehen, dass amerikanische Geheimdienste das Netzwerk bewusst aufgebaut haben, um jeden abzuhören, der offenbar etwas zu verstecken hat?"
 \\
-Kürzlich ist bekannt geworden, dass die Bemühungen der NSA, Nutzer vom Tor-Netzwerk gezielt zu de-anonymisieren, sehr ineffizient sind.\footnote{\url{http://www.heise.de/security/meldung/Neues-von-der-NSA-Tor-stinkt-1972983.html}}
+Kürzlich ist bekannt geworden, dass die Bemühungen der NSA, Nutzer vom Tor-Netzwerk gezielt zu de-anonymisieren, sehr ineffizient sind.\footnote{Link 27, Linkverzeichnis, heise}
 Ist das eine bewusste Falschmeldung? Oder ist Tor vielleicht doch sicherer, als es den Anschein macht? Diese Frage lässt sich leider nicht abschliessend beantworten. Trotzdem sollte nicht ausser Acht gelassen werden, dass die Tor-Software ein Open Source Software ist, die aus vielen Fachkreisen befürwortet wird. Es lohnt sich deshalb, die Funktionsweise von Tor zu analysieren, um mehr Substanz für ein Urteil zu gewinnen.
 
 \subsection{Wie funktioniert Tor?}
@@ -94,11 +94,11 @@ Im Folgenden werden die verschiedenen Stationen bzw. Phasen der Prozedur genauer
 \item Er baut nun eine verschlüsselte Verbindung mit dem ersten Tor-Server (Entry-Guard) der Route auf und sendet ihm die Daten.
 \item Der Entry-Guard verschlüsselt die Daten erneut und sendet diese an einen weiteren Tor-Server.
 \item Dieser tut genau das Gleiche noch einmal, worauf die Daten schliesslich zum letzten Server (Exit-Node) kommen.
-\item Der Exit-Node entschlüsselt die Daten und leitet sie zum gewünschten Ziel weiter. Das ist die einzige Strecke im ganzen Ablauf, auf der die Daten nicht mehr verschlüsselt weitergeleitet werden.\footnote{\url{https://www.torproject.org/about/overview.html.en\#thesolution}}
-\footnote{\url{https://de.wikipedia.org/wiki/Tor_\%28Netzwerk\%29\#Anonymes_Surfen}}
+\item Der Exit-Node entschlüsselt die Daten und leitet sie zum gewünschten Ziel weiter. Das ist die einzige Strecke im ganzen Ablauf, auf der die Daten nicht mehr verschlüsselt weitergeleitet werden.\footnote{Link 28, Linkverzeichnis, Tor Project}
+\footnote{Link 29, Linkverzeichnis, Wikipedia}
 \end{enumerate}
 
-Die versendeten Daten werden im Laufe der Kaskade in mehrere Verschlüsselungsschichten verpackt, damit die passierten Tor-Server nicht sehen können, worum es sich dabei handelt. Daher kommt auch der Name der Prozedur. Der finale Aufbau des Pakets gleicht einer Zwiebel mit mehreren Schichten, die  schlussendlich wieder entpackt werden müssen. Diese Aufgabe übernimmt dann, wie schon erwähnt, der Exit-Node. Generell gilt, dass die Daten immer drei Tor-Server passieren. Da die Tor-Server jeweils nur die Rechner links und rechts von sich kennen, weiss nur der erste Tor-Server über die Identität des Nutzers Bescheid. Der dritte und letzte Tor-Server kennt dann nur noch den Tor-Server, der ihm die Daten weitergeleitet hat, die Daten selbst und das finale Ziel.\footnote{\url{https://de.wikipedia.org/wiki/Onion-Routing\#Verschl.C3.BCsselungsschema}}
+Die versendeten Daten werden im Laufe der Kaskade in mehrere Verschlüsselungsschichten verpackt, damit die passierten Tor-Server nicht sehen können, worum es sich dabei handelt. Daher kommt auch der Name der Prozedur. Der finale Aufbau des Pakets gleicht einer Zwiebel mit mehreren Schichten, die  schlussendlich wieder entpackt werden müssen. Diese Aufgabe übernimmt dann, wie schon erwähnt, der Exit-Node. Generell gilt, dass die Daten immer drei Tor-Server passieren. Da die Tor-Server jeweils nur die Rechner links und rechts von sich kennen, weiss nur der erste Tor-Server über die Identität des Nutzers Bescheid. Der dritte und letzte Tor-Server kennt dann nur noch den Tor-Server, der ihm die Daten weitergeleitet hat, die Daten selbst und das finale Ziel.\footnote{Link 30, Linkverzeichnis, Wikipedia}
 Die zufällig gewählte Route wird vom Tor-Client ungefähr alle zehn Minuten gewechselt. So soll eine möglichst hohe Sicherheit gewährleistet werden. Gefährlich wird es für den Nutzer dann, wenn jemand Eintritts- und Austrittsknoten kontrolliert. Die Anonymität wäre dann aufgehoben, da der \textit{Lauscher} Ursprung, Ziel und Inhalt der Daten kennt.
 
 \begin{figure}[H]
@@ -116,7 +116,7 @@ Soll Tor benutzt werden, müssen weitere Regeln beachtet werden, die es für ein
 \item Tor nur dann benutzen, wenn es auch wirklich Sinn macht
 \end{itemize}
 
-Der letzte Punkt ist sehr wichtig, da die Anonymität durch Protokollierung gebrochen werden kann. Protokolliert ein Tor-Server genügend lang die passierenden Daten, kann nach durchschnittlich sechs Monaten die Identität aufgedeckt werden. Je öfter man den Dienst also braucht, desto mehr Informationen gibt man dem vermeintlichen Schnüffler. Die Zeit bis zum Aufdecken der Identität ist dabei stark von der Infrastruktur abhängig. Staatliche Behörden mit immensen Rechenzentren hätten folglich keine grossen Probleme damit, die Anonymität von beobachteten Nutzern nach kurzer Zeit aufzuheben.\footnote{\url{http://www.heise.de/security/meldung/Tor-Benutzer-leicht-zu-enttarnen-1949449.html}}
+Der letzte Punkt ist sehr wichtig, da die Anonymität durch Protokollierung gebrochen werden kann. Protokolliert ein Tor-Server genügend lang die passierenden Daten, kann nach durchschnittlich sechs Monaten die Identität aufgedeckt werden. Je öfter man den Dienst also braucht, desto mehr Informationen gibt man dem vermeintlichen Schnüffler. Die Zeit bis zum Aufdecken der Identität ist dabei stark von der Infrastruktur abhängig. Staatliche Behörden mit immensen Rechenzentren hätten folglich keine grossen Probleme damit, die Anonymität von beobachteten Nutzern nach kurzer Zeit aufzuheben.\footnote{Link 31, Linkverzeichnis, heise}
 
 \subsection{Vor- und Nachteile}
 Tor ermöglicht dem Nutzer, sich anonym im Netz zu bewegen. Die Einrichtung des Dienstes ist dabei relativ simpel und schnell erledigt. Nachteilig daran ist, dass das \textit{Surferlebnis} relativ stark eingeschränkt ist, also viele Multimediafunktionalitäten nicht gleichzeitig genutzt werden können. Auch die Geschwindigkeit, mit der man im Netz unterwegs ist, ist geringer als ohne Tor. Auch hier ist es wieder eine Frage der Prioritäten. Eine grössere Verbreitung und Unterstützung von Tor würde hier aber teilweise Abhilfe schaffen. Man muss sich vielleicht einfach noch etwas gedulden. Auch sollte man sehr bewusst mit Tor umgehen. Man macht sich möglicherweise automatisch verdächtig durch die Benutzung des Dienstes und sollte auch nicht vergessen, wer der finanzielle Hauptsponsor des Projektes ist.
