@@ -1,21 +1,50 @@
 \section{E-Mails und deren Tücken}
-Täglich werden heute bis zu 180 Milliarden E-Mails pro Tag versendet. Eine gewaltige Menge, wenn man bedenkt, dass es ein wenig mehr als sieben Milliarden Menschen auf diesem Planet gibt.
-Doch nur wenige E-Mail Nutzer machen sich Gedanken darüber, was denn eigentlich hinter einer E-Mail steckt. Wohin geht sie genau? Wer alles kann diese E-Mail theoretisch lesen? Wo wird diese Nachricht, wenn ich sie mal versendet habe, überall gespeichert? Und für wie lange? Gibt es Kopien? Backups? Auf anderen Servern?
-All diese Fragen sind sehr wichtig, wenn man vertrauliche Daten per Mail versendet. Aber nicht nur dann, denn selbst wenn die Nachricht nicht von grosser Bedeutung ist, so möchte man doch eine gewisse Privatsphäre wahren.
-Was kann man also als „0815“ Privatbenutzer einer E-Mail Adresse tun um seine eigenen Mails möglichst sicher zu versenden, zu speichern und  zu empfangen?
-Im nächsten Kapitel wird versucht auf alle diese Fragen eine Antwort zu finden. Zuerst einmal muss man aber verstehen, wie das genau funktioniert, mit den „Mails“.
+Täglich werden heute bis zu 180 Milliarden E-Mails versendet. Eine gewaltige Menge, wenn man bedenkt, dass es ein wenig mehr als sieben Milliarden Menschen auf diesem Planeten gibt.
+Doch nur wenige E-Mail-Nutzer machen sich wohl Gedanken darüber, was denn eigentlich hinter einer E-Mail steckt. Wohin geht sie genau? Wer kann diese E-Mail theoretisch lesen? Wo wird diese Nachricht überall gespeichert? Und für wie lange? Gibt es Kopien? Backups? Auf anderen Servern?
+All diese Fragen sind sehr wichtig, wenn man vertrauliche Daten per Mail versendet. Doch auch wenn die Nachricht nicht von grosser Bedeutung ist, möchte man doch eine gewisse Privatsphäre wahren, oder?
+Was kann man also als „0815“ Nutzer tun, um seine eigenen E-Mails möglichst sicher zu versenden, zu speichern und zu empfangen?
+\\
+Im nächsten Kapitel wird versucht auf diese Fragen eine Antwort zu finden. Zuerst einmal muss man aber verstehen, wie das genau funktioniert, mit den „Mails“.
 
 \subsection{Funktionsweise des Mailverkehrs}
 
 \begin{figure}[H]
 \centering
-\noindent\includegraphics[scale=0.14]{images/mailverkehr.jpg}
+\noindent\includegraphics[scale=0.6]{images/email_function}
 \caption{Funktionsweise Mailverkehr}
 \end{figure}
 
-\subsubsection{Der Weg vom Sender zum Empfänger}
-Sobald die E-Mail vom Sender abgeschickt wird und ins Internet gelangt, wird diese von Mail Transport Agent (MTA)\footnote{Link 32, Linkverzeichnis, Wikipedia} zu MTA geschickt, bis derjenige des Empfängers gefunden wird. Anschliessen leitet dieser MTA die E-Mail zum Mail Delivery Agent (MDA)\footnote{Link 33, Linkverzeichnis, Wikipedia} des Empfängers weiter. \\
-Von dort aus kann der Empfänger sein E-Mail nun über das POP3\footnote{Link 34, Linkverzeichnis, Wikipedia} oder IMAP\footnote{Link 35, Linkverzeichnis, Wikipedia} Protokoll abrufen.
+Eine E-Mail passiert von der Erzeugung beim Sender bis zur Abgabe beim Empfänger mehrere Posten. Um die Funktionsweise des E-Mail-Verkehrs beschreiben zu können, müssen diese Posten zuerst erklärt werden:
+
+\begin{itemize}
+\item Mail-Client: Beim Client handelt es sich um das Mail-Programm, welches E-Mails senden und empfangen kann. Sowohl der Sender als auch der Empfänger sind auf ein solches angewiesen.
+\item Mail Transfer Agent (MTA): Der Mail Transfer Agent ist für den Transport der E-Mail verantwortlich.
+\footnote{Link 32, Linkverzeichnis, Wikipedia}
+\item Mail Delivery Agent (MDA): Der Mail Delivery Agent hat die Aufgabe, die E-Mail beim Empfänger abzuliefern, sobald diese vom Mail Transport Agent übermittelt wurde.
+\footnote{Link 33, Linkverzeichnis, Wikipedia}
+\end{itemize}
+
+Bei MTA und MDA handelt es sich um Computer-Programme, welche typischerweise auf den Servern (Computern) des jeweiligen Providers launfen.
+\\
+\\
+Ablauf des E-Mail-Verkehrs:
+
+\begin{enumerate}
+\item Der Sender verfasst mit Hilfe des Clients eine Mail für einen bestimmten Empfänger drückt anschliessend auf \textit{Senden}.
+\item Der Client übermittelt das E-Mail bei aktiver Internetverbindung an den ersten MTA.
+\item Das Mail wird nun von MTA zu MTA geschickt, bis derjenige des Empfängers gefunden wird.
+\item Der MTA des Empfängers übermittelt das Mail an den MDA, welcher das Mail aufbewahrt.
+\item Der Client des Empfängers holt das Mail beim MDA ab und stellt es dem Empfänger zur Verfügung.
+\end{enumerate}
+
+Je nach verwendetem Protokoll wird dem Empfänger eine Kopie des Mails zugestellt (IMAP), wobei das Original auf dem Server bleibt, oder er erhält das Original (POP3).
+\\
+\\
+IMAP (Internet Message Access Protocol) hat den Vorteil, das man im Falle eines lokalen Datenverlusts noch eine Kopie des Mails auf dem Server hat. Es eignet sich zudem sehr gut für die parallele Nutzung von mehreren Geräten (Computer, Tablet, Smartphone), da die E-Mails jeweils synchronisiert (abgeglichen) werden.
+\footnote{Link 35, Linkverzeichnis, Wikipedia}
+\\
+\\
+POP3 (Post Office Protocol 3) bietet diese Möglichkeiten nicht. Es eignet sich aber für Leute, die gerne selbst bestimmen, wo ihre E-Mails aufbewahrt werden. Seit den Snowden-Enthüllungen hat dieses Argument wieder an Bedeutung gewonnen.
 
 \subsection{Mein Provider und seine Server}
 Die erste Entscheidung, die man treffen muss, um überhaupt eine E-Mail senden zu können, noch bevor man überhautp seinen Mail-Client startet, ist es, sich einen passenden Provider auszusuchen. Ein Provider ist meist eine Firma, die seinen Kunden eine Mail Adresse zur Verfügung stellt. Dies kann z.B. Google mit Gmail, Microsoft mit Hotmail oder eine Firma wie GMX sein. Was ein solcher Provider also tut, ist es irgendwo eine E-Mail Adresse für den Kunden zu konfigurieren. Dazu gehört einmal eine Adresse zum Mail Transport Agent und eine Adresse zum Mail Delivery Agent Server.
