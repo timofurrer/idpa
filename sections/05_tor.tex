@@ -1,28 +1,27 @@
 \section{Surfen im Internet - Wie anonym ist anonym?}
-Wenn man im Internet surft, hat man grundsätzlich das Gefühl, alleine und anonym unterwegs zu sein.
+Wenn man im Internet surft, hat man vielleicht das Gefühl, alleine und anonym unterwegs zu sein.
 Diese Annahme ist aber falsch, denn \textit{das Internet} ist sich sehr wohl darüber bewusst, wer wann wo unterwegs ist. Um zu verstehen, wie man sich  mehr Anonymität verschaffen kann, müssen zuerst gewisse Bestandteile und Funktionsweisen des Internets bekannt sein.
 
 \subsection{IP-Adressen und Domänennamen}
-Das Internet besteht aus millionen von Computern und anderen Geräten, die miteinander vernetzt sind.
+Das Internet besteht aus Millionen von Computern und anderen Geräten, die miteinander vernetzt sind.
 Auch der private Computer mit Internetzugang, den man für tägliche Arbeiten benutzt, ist ein Teil davon.
 Jedes dieser Geräte hat nach aussen hin einen eindeutigen Identifikator, die sogenannte IP-Adresse.
-Die IP-Adresse besteht aus mehreren Blöcken, die wiederum aus Zahlen bestehen.
+Die IP-Adresse besteht aus mehreren aneinandergereihten Zahlenblöcken, die durch Punkte unterteilt sind.
 Sie ist dabei immer eindeutig und wird einem vom Provider (z.B. Swisscom) zugeteilt.
 Eine IP-Adresse könnte folgendermassen aussehen: \textit{143.39.238.12}.
 Die IP-Adresse wird aber nicht nur Privatanwendern zugewiesen, damit diese sich im Internet bewegen können.
 Auch hinter \textit{www.google.ch} steckt eine IP-Adresse und genau so verhält es sich mit allen anderen Internetdiensten (Webseiten, Datei-Servern, Download-Plattformen, etc.).
 Jeder Dienst lässt sich über seine IP-Adresse ansprechen, sofern diese bekannt ist.
-Da sich Menschen Namen aber deutlich leichter merken können, als Abfolgen von Zahlen, hat man das \textit{Domain Name System} (DNS) eingeführt.
-Das DNS ist ein Verzeichnisdienst, der den Namensraum des Internets verwaltet und ist weltweit auf tausende von Server verteilt.
+Da sich Menschen Namen aber deutlich leichter merken können als Abfolgen von Zahlen, hat man das \textit{Domain Name System} (DNS) eingeführt.
+Das DNS ist ein Verzeichnisdienst, der den Namensraum des Internets verwaltet und ist weltweit auf tausende von Servern verteilt.
 Seine Aufgabe besteht darin, sogenannte Domänennamen wie \textit{google.ch} in die zugehörigen IP-Adressen umzuwandeln\footnote{Link 21, Linkverzeichnis, Wikipedia}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.4]{images/wikipedia_www}
-\caption{Darstellung der Vernetzung im Internet - Hier Webseiten um en.wikipedia.org}
+\caption{Darstellung der Vernetzung im Internet - Hier Webseiten um \textit{en.wikipedia.org}}
 \end{figure}
 
-\newpage
 \subsection{Server und Client}
 Aus den obigen Erklärungen lässt sich ableiten, dass sich hinter einem Internetdienst immer auch ein Computer bzw. Server befinden muss.
 Doch was ist ein Server eigentlich? Wikipedia gibt folgende Definition an:
@@ -43,16 +42,14 @@ Welche Informationen können von den Server überhaupt eingesehen werden?
 \\
 Lediglich die letzte Frage lässt sich klar beantworten.
 Diese verweist auch auf die Möglichkeiten, die man hat, die Privatsphäre im Internet zu erhöhen.
-\\
-\\
 Zu den Spuren, die man im Internet hinterlässt, gehören unter anderem die IP-Adresse und damit zusammenhängend Informationen zum Provider und dessen Niederlassung.
 Auch Informationen zum Browser inklusive dem verwendeten Betriebssystem können von den passierten Servern eingesehen werden.
-Es gibt darüber hinaus viele verschiedene Technologien und Techniken, die es Servern erlauben, detailliertere Nutzerinformationen abzuschöpfen (z.B. Cookies).
+Es gibt darüber hinaus viele verschiedene Technologien und Techniken, die es Servern erlauben, detailliertere Nutzerinformationen abzuschöpfen.
 In diesem Kapitel liegt der Fokus aber auf den Verbindungsdaten - den IP-Adressen - und deren Anonymisierung.
-An dieser Stelle setzt Tor an.
+Und an dieser Stelle kommt Tor ins Spiel.
 
 \subsection{Verbindungsdaten anonymisieren mit Tor}
-Tor, ein Akronym für The Onion Routing, ist ein Netzwerk, welches geschaffen wurde, um Verbindungsdaten zu anonymisieren.
+Tor, ein Akronym für \textit{The Onion Routing}, ist ein Netzwerk, welches geschaffen wurde, um Verbindungsdaten zu anonymisieren.
 Die Entwicklungen an Tor begannen 2002 an der Universität in Cambridge und dauern bis heute an. Um das Tor-Netzwerk zu verwenden, wird ein gleichnamiges Computerprogramm benötigt, welches frei nutzbar ist. Der Quellcode der Software ist veröffentlicht und für jedermann einsehbar.
 Global betrachtet nutzt wohl nur ein kleiner Teil der Leute Tor, da es erstens nicht sehr bekannt ist und zweitens die Nutzung mit einem gewissen Mehraufwand verbunden ist, der zusätzliches technisches Know-How verlangt. Im Rahmen der Enthüllungen von Edward Snowden hat Tor aber an Bedeutung gewonnen. Die kritischen Stimmen wurden jedoch ebenfalls lauter und das zu Recht.
 
@@ -68,7 +65,7 @@ So wird die Weiterentwicklung von Tor bis heute zu grossen Teilen von militäris
 Dies grenzt beinahe schon an Ironie, sind es doch die amerikanischen Geheimdienste, die das Internet im grössten Masse aushorchen. Die Frage, die sich deshalb aufdrängt ist die Folgende: "Kann man überhaupt noch auf die anonyme Funktionsweise von Tor vertrauen oder muss man davon ausgehen, dass amerikanische Geheimdienste das Netzwerk bewusst aufgebaut haben, um jeden abzuhören, der offenbar etwas zu verstecken hat?"
 \\
 Kürzlich ist bekannt geworden, dass die Bemühungen der NSA, Nutzer vom Tor-Netzwerk gezielt zu de-anonymisieren, sehr ineffizient sind.\footnote{Link 27, Linkverzeichnis, heise}
-Ist das eine bewusste Falschmeldung? Oder ist Tor vielleicht doch sicherer, als es den Anschein macht? Diese Frage lässt sich leider nicht abschliessend beantworten. Trotzdem sollte nicht ausser Acht gelassen werden, dass die Tor-Software ein Open Source Software ist, die aus vielen Fachkreisen befürwortet wird. Es lohnt sich deshalb, die Funktionsweise von Tor zu analysieren, um mehr Substanz für ein Urteil zu gewinnen.
+Handelt es sich dabei um eine bewusste Falschmeldung? Oder ist Tor vielleicht doch sicherer als es den Anschein macht? Diese Frage lässt sich leider nicht abschliessend beantworten. Trotzdem sollte nicht ausser Acht gelassen werden, dass die Tor-Software aus vielen Fachkreisen befürwortet wird. Es lohnt sich deshalb, die Funktionsweise von Tor zu analysieren, um mehr Substanz für ein Urteil zu gewinnen.
 
 \subsection{Wie funktioniert Tor?}
 Der Name \textit{The Onion Routing} kommt nicht von ungefähr. Die verwendete Anonymisierungstechnik \textit{Onion-Routing} lässt auf Grund ihrer Funktionsweise Vergleiche mit einer Zwiebel zu. Nachfolgend soll diese genauer erklärt werden. Dazu müssen zuerst ein paar Begriffe definiert sein:
@@ -79,7 +76,7 @@ Der Name \textit{The Onion Routing} kommt nicht von ungefähr. Die verwendete An
 \item Exit-Node: Letzter Tor-Server in der Kaskade, der als Endpunkt auftritt und die Daten bzw. die Anfrage an das gewünschte Ziel weiterleitet
 \end{itemize}
 
-Im Folgenden werden die verschiedenen Stationen bzw. Phasen der Prozedur genauer beschrieben. Man bekommt vielleicht das Gefühl, dass der Ablauf zeitintensiv und aufwendig ist. Tatsächlich handelt es sich aber von Start bis Ende des Ablaufs lediglich um Millisekunden bzw. Sekunden. Das Ganze hängt natürlich auch immer von der eigenen Verbindungsgeschwindigkeit, der konkreten Anwendung und der Performanz des Tor-Netzwerks ab.
+Im Folgenden werden die verschiedenen Stationen bzw. Phasen der Prozedur genauer beschrieben. Man bekommt vielleicht das Gefühl, dass der Ablauf aufwendig und zeitintensiv ist. Tatsächlich handelt es sich aber von Start bis Ende des Ablaufs lediglich um Millisekunden. Das Ganze hängt natürlich auch immer von der eigenen Verbindungsgeschwindigkeit, der konkreten Anwendung und der Performanz des Tor-Netzwerks ab.
 
 \begin{enumerate}
 \item Um Tor überhaupt nutzen zu können, muss als erstes der  Client (Onion-Proxy) gestartet werden.
@@ -93,7 +90,10 @@ Im Folgenden werden die verschiedenen Stationen bzw. Phasen der Prozedur genauer
 \end{enumerate}
 
 Die versendeten Daten werden im Laufe der Kaskade in mehrere Verschlüsselungsschichten verpackt, damit die passierten Tor-Server nicht sehen können, worum es sich dabei handelt. Daher kommt auch der Name der Prozedur. Der finale Aufbau des Pakets gleicht einer Zwiebel mit mehreren Schichten, die  schlussendlich wieder entpackt werden müssen. Diese Aufgabe übernimmt dann der Exit-Node. Generell gilt, dass die Daten immer drei Tor-Server passieren. Da die Tor-Server jeweils nur die Rechner links und rechts von sich kennen, weiss nur der erste Tor-Server über die Identität des Nutzers Bescheid. Der dritte und letzte Tor-Server kennt dann nur noch den Tor-Server, der ihm die Daten weitergeleitet hat, die Daten selbst und das finale Ziel.\footnote{Link 30, Linkverzeichnis, Wikipedia}
-Die zufällig gewählte Route wird vom Tor-Client ungefähr alle zehn Minuten gewechselt. So soll eine möglichst hohe Sicherheit gewährleistet werden. Gefährlich wird es für den Nutzer dann, wenn jemand Eintritts- und Austrittsknoten kontrolliert. Die Anonymität wäre dann aufgehoben, da der \textit{Lauscher} Ursprung, Ziel und Inhalt der Daten kennt.
+Die zufällig gewählte Route wird vom Tor-Client ungefähr alle zehn Minuten gewechselt. So soll eine möglichst hohe Sicherheit gewährleistet werden.
+\\
+\\
+Gefährlich wird es für den Nutzer dann, wenn jemand Eintritts- und Austrittsknoten kontrolliert. Die Anonymität wäre dann aufgehoben, da der \textit{Lauscher} Ursprung, Ziel und Inhalt der Daten kennt.
 
 \begin{figure}[H]
 \centering
@@ -101,7 +101,7 @@ Die zufällig gewählte Route wird vom Tor-Client ungefähr alle zehn Minuten ge
 \caption{Tor}
 \end{figure}
 
-Soll Tor benutzt werden, müssen weitere Regeln beachtet werden, die es für eine erfolgreiche Anonymisierung einzuhalten gilt:
+Beim Einsatz von Tor müssen zusätzlich gewisse Regeln beachtet werden, die es für eine erfolgreiche Anonymisierung einzuhalten gilt:
 \begin{itemize}
 \item Wann immer möglich, eine verschlüsselte Verbindung aufbauen (HTTPS)
 \item Soziale Netzwerke vermeiden, da sie die Identität preisgeben
@@ -110,28 +110,27 @@ Soll Tor benutzt werden, müssen weitere Regeln beachtet werden, die es für ein
 \item Tor nur dann benutzen, wenn es auch wirklich Sinn macht
 \end{itemize}
 
-Der letzte Punkt ist sehr wichtig, da die Anonymität durch Protokollierung gebrochen werden kann. Protokolliert ein Tor-Server genügend lang die passierenden Daten, kann nach durchschnittlich sechs Monaten die Identität aufgedeckt werden. Je öfter man den Dienst also braucht, desto mehr Informationen gibt man dem vermeintlichen Schnüffler. Die Zeit bis zum Aufdecken der Identität ist dabei stark von der Infrastruktur abhängig. Staatliche Behörden mit immensen Rechenzentren hätten folglich keine grossen Probleme damit, die Anonymität von beobachteten Nutzern nach kurzer Zeit aufzuheben.\footnote{Link 31, Linkverzeichnis, heise}
+Der letzte Punkt ist sehr wichtig, da die Anonymität durch Protokollierung gebrochen werden kann. Protokolliert ein Tor-Server genügend lang die passierenden Daten, kann nach durchschnittlich sechs Monaten die Identität aufgedeckt werden. Je öfter man den Dienst also braucht, desto mehr Informationen gibt man dem vermeintlichen Schnüffler. Die Zeit bis zum Aufdecken der Identität ist dabei stark von der Infrastruktur abhängig. Staatliche Behörden mit immensen Rechenzentren hätten folglich keine grossen Probleme, die Anonymität von passierenden Nutzern nach kurzer Zeit aufzuheben.\footnote{Link 31, Linkverzeichnis, heise}
 
 \subsection{Vor- und Nachteile}
 Tor hat ganz klare Vorteile aber auch bestimmte Nachteile, die nicht ausser Acht gelassen werden sollten.
 Nachfolgend werden die Vor- und Nachteile noch einmal kurz aufgelistet.
 \\
 \\
-Vorteile
+
+\textbf{Vorteile}
 \begin{itemize}
-\item Relativ sicher, was Anonymität betrifft
+\item Relativ sicher
 \item Einfach einzurichten
 \item Open-Source
-\item Kostenlos
 \end{itemize}
 
-Nachteile
+\textbf{Nachteile}
 \begin{itemize}
-\item Starker Zusammenhang mit amerikanischen Behörden (finanz. Unterstützung)
-\item Schlechter Ruf
 \item Bei falscher Anwendung ineffektiv
+\item Zusammenhang mit amerikanischen Behörden (finanz. Unterstützung)
+\item Schlechter Ruf
 \item Noch relativ langsam
-\item Nutzung von Multimediafunktionalitäten im Web eingeschränkt
 \end{itemize}
 
 \subsection{Experiment}
@@ -142,15 +141,15 @@ Der Access Point hat dabei die Aufgabe, jedes Gerät, das sich mit ihm verbindet
 Als Computer kam ein Raspberry Pi zum Einsatz.
 Es handelt sich dabei um einen Einplatinen-Computer mit beschränkten Ressourcen, der sich vor allem wegen seiner geringen Grösse sehr gut für dieses Experiment eignete.
 Einzelheiten dazu sind im Handbuch beschrieben.
-Als Betriebssystem wurde eine für den Pi angepasste Version von Debian mit dem Namen Raspbian verwendet.
+Als Betriebssystem wurde eine für den Pi angepasste Version von Debian mit dem Namen \textit{Raspbian} verwendet.
 Es handelt sich dabei um eine Linux-Distribution, die jedermann frei herunterladen und benutzen kann.
 
 \subsubsection{Installation}
-Die erste Hürde bei dem Experiment war die Wahl des WLAN-Adapters, welcher für die Access Point Funktionalität benötigt wird. Nicht jeder Adapter kann in den \textit{Access Point Modus} versetzt werden, weshalb zuerst ein kompatibles Gerät ausfindig gemacht und bestellt werden musste. Die restlichen Komponenten, die vor allem für den Betrieb des Raspberry Pis gebraucht werden, waren bereits vorhanden und schnell eingerichtet. Die Installation selbst funktionierte ohne grosse Probleme. Man kann diese grob in zwei Schritte aufteilen. Der erste Schritt, das Einrichten des Raspberry Pis als Access Point, ist der aufwendigere der beiden und es gab diverse Konfigurationen, die vorgenommen werden mussten. Der zweite Schritt, das Installieren und Einrichten von Tor, war schnell erledigt. Allgemein ist die Installation kein grosses Problem, da es im Internet eine Menge Anleitungen und Hilfestellungen gibt, auf die man zurückgreifen kann. Beim anschliessenden Testen des Tor Access Points wurde noch die eine oder andere Einstellungsmöglichkeit entdeckt, die die Sicherheit von Tor zusätzlich erhöhen.
+Die erste Hürde bei dem Experiment war die Wahl des WLAN-Adapters, welcher für die Access Point Funktionalität benötigt wird. Nicht jeder Adapter kann in den ``Access Point Modus'' versetzt werden, weshalb zuerst ein kompatibles Gerät angeschafft werden musste. Die restlichen Komponenten, die vor allem für den Betrieb des Raspberry Pis gebraucht werden, waren bereits vorhanden und schnell eingerichtet. Die Installation selbst funktionierte ohne grosse Probleme. Man kann diese grob in zwei Schritte aufteilen. Der erste Schritt, das Einrichten des Raspberry Pis als Access Point, ist der aufwendigere der beiden und es gab diverse Konfigurationen, die vorgenommen werden mussten. Der zweite Schritt, das Installieren und Einrichten von Tor, war relativ einfach und schnell erledigt. Beim anschliessenden Testen des Tor Access Points wurde zudem noch die eine oder andere Einstellungsmöglichkeit entdeckt, die die Sicherheit von Tor zusätzlich erhöhen.
 
 \subsubsection{Fazit}
-Das Einrichten von Tor war gut bewältigbar und spannend dazu. Anhand von Hilfestellungen und Anleitungen im Internet liessen sich auch die oben beschriebenen Probleme lösen. Die angeschaffte Hardware - Raspberry Pi und Zubehör - kostete knapp unter 100 Franken. Wer Tor ausprobieren möchte, ohne die Software auf seinem Produktivsystem zu installieren, sollte auf diese Variante zurückgreifen.
+Das Einrichten von Tor war gut bewältigbar und spannend dazu. Anhand von Hilfestellungen und Anleitungen im Internet liessen sich auch die oben beschriebenen Probleme gut lösen. Die benötigte Hardware - Raspberry Pi und Zubehör - kostet knapp unter 100 Franken. Wer Tor ausprobieren möchte, ohne die Software auf seinem Produktivsystem zu installieren, sollte auf diese Variante zurückgreifen.
 \\
-An dieser Stelle kann der Einsatz von Tor nicht uneingeschränkt empfohlen werden. Dazu gibt es schlicht zu viele Ungereimtheiten. Ausprobieren und Kennenlernen lohnt sich aber allemal. Man kann viel dabei lernen und evtl. gibt es in Zukunft klarere Antworten auf die vielen Fragen, die sich im Zusammenhang mit Tor stellen. Es gibt zudem Möglichkeiten, bestimmte Risiken zu minimieren. Auch dazu findet man detaillierte Informationen im Handbuch.
+Obwohl das Experiment erfolgreich war und Tor ein ernst zu nehmendes ``Produkt'' ist, kann dessen Einsatz an dieser Stelle nicht uneingeschränkt empfohlen werden. Dazu gibt es schlicht zu viele Ungereimtheiten. Ausprobieren und Kennenlernen lohnt sich aber allemal. Man kann viel dabei lernen und evtl. gibt es in Zukunft klarere Antworten auf die Fragen, die sich im Zusammenhang mit Tor stellen.
 \\
-Das Handbuch befindet sich im Anhang zu diesem Dokument oder einzeln unter: ...xyz
+Das Handbuch, in dem der Installationsprozess detailliert beschrieben ist, befindet sich im Anhang oder kann einzeln heruntergeladen werden unter: ...xyz
