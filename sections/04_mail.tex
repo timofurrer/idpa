@@ -4,7 +4,7 @@ Doch nur wenige E-Mail-Nutzer machen sich wohl Gedanken darüber, was denn eigen
 All diese Fragen sind sehr wichtig, wenn man vertrauliche Daten per Mail versendet. Doch auch wenn der Inhalt der Nachricht nicht von grosser Bedeutung ist, möchte man eine gewisse Privatsphäre wahren, oder?
 Was kann man also als „0815“ Nutzer tun, um seine eigenen E-Mails möglichst sicher zu versenden, zu speichern und zu empfangen?
 \\
-Im nächsten Kapitel wird versucht auf diese Fragen eine Antwort zu finden. Zuerst einmal muss man aber verstehen, wie das genau funktioniert, mit den „Mails“.
+Im nächsten Kapitel wird versucht auf diese Fragen eine Antwort zu finden. Zuerst einmal muss man aber verstehen, wie das genau funktioniert mit den „Mails“.
 
 \subsection{Funktionsweise des Mailverkehrs}
 
@@ -24,7 +24,7 @@ Eine E-Mail passiert von der Erzeugung beim Sender bis zur Abgabe beim Empfänge
 \footnote{Link 17, Linkverzeichnis, Wikipedia}
 \end{itemize}
 
-Bei MTA und MDA handelt es sich um Computer-Programme, welche typischerweise auf den Servern (Computern) des jeweiligen Providers launfen.
+Bei MTA und MDA handelt es sich jeweils um Computer-Programme, welche typischerweise auf den Servern (Computern) des jeweiligen Providers laufen.
 \\
 \\
 Ablauf des E-Mail-Verkehrs:
@@ -34,10 +34,10 @@ Ablauf des E-Mail-Verkehrs:
 \item Der Client übermittelt die E-Mail bei aktiver Internetverbindung an den ersten MTA.
 \item Die Mail wird nun von MTA zu MTA geschickt, bis derjenige des Empfängers gefunden wird.
 \item Der MTA des Empfängers übermittelt die Mail an den MDA, welcher die Mail aufbewahrt.
-\item Der Client des Empfängers holt die Mail beim MDA ab und stellt es dem Empfänger zur Verfügung.
+\item Der Client des Empfängers holt die Mail bei aktiver Internetverbindung beim MDA ab und stellt sie dem Empfänger zur Verfügung.
 \end{enumerate}
 
-Je nach verwendetem Protokoll wird dem Empfänger eine Kopie des Mails zugestellt (IMAP), wobei das Original auf dem Server bleibt, oder er erhält das Original (POP3).
+Je nach verwendetem Protokoll wird dem Empfänger eine Kopie der Mail zugestellt (IMAP), wobei das Original auf dem Server bleibt, oder er erhält das Original selbst (POP3).
 \\
 \\
 IMAP (Internet Message Access Protocol) hat den Vorteil, das man im Falle eines lokalen Datenverlusts noch eine Kopie des Mails auf dem Server hat. Es eignet sich zudem sehr gut für die parallele Nutzung von mehreren Geräten (Computer, Tablet, Smartphone), da die E-Mails jeweils synchronisiert (abgeglichen) werden.
@@ -48,16 +48,16 @@ POP3 (Post Office Protocol 3) bietet diese Möglichkeiten nicht. Es eignet sich 
 \footnote{Link 19, Linkverzeichnis, Wikipedia}
 
 \subsection{Mein Provider und seine Server}
-Der erste Schritt den man tun muss, um überhaupt eine E-Mail senden zu können, ist es, sich einen passenden Provider auszusuchen. Ein Provider ist eine Firma, die ihren Kunden eine Mail-Adresse zur Verfügung stellt. Dies kann z.B. Google mit Gmail, Microsoft mit Hotmail oder eine Firma wie GMX sein. Der Provider muss diese E-Mail-Adresse konfigurieren damit der Kunde sie gebrauchen kann. Zur Konfiguration gehört zum einen die Adresse zum Mail Transfer Agent und zum andern die Adresse zum Mail Delivery Agent.
-Diese beiden Server sind nicht nur in Bezug auf die allgemeine Mailfunktionalität von Bedeutung. Nein, denn dort, auf diesen Servern, unter der Kontrolle des jeweiligen Providers, geht jede einzelne E-Mail, die versendet oder empfangen wird, durch. Das bedeutet, dass dort theoretisch ein Mitschnitt aller Nachrichten gemacht werden kann. Auch macht der Provider, natürlich nur zum Besten seiner Kunden, Backups (Sicherungen) von deren Postfächer. Das mag ja schön und gut sein und ist im Falle eines Datenverlusts äusserst praktsich, aber wer kann sonst noch auf dieses Postfach oder die Backup-Daten zugreifen? Die Systemadministratoren vom Provider? PR-Firmen? Datenanalysten? Geheimdienste? Wer weiss.
+Der erste Schritt, den man tun muss, um überhaupt eine E-Mail versenden zu können, ist es, sich einen passenden Provider auszusuchen. Ein Provider ist eine Firma, die ihren Kunden eine Mail-Adresse zur Verfügung stellt. Dies kann z.B. Google mit Gmail, Microsoft mit Hotmail oder eine Firma wie GMX sein. Der Provider muss diese E-Mail-Adresse konfigurieren, damit der Kunde sie gebrauchen kann. Zur Konfiguration gehört unter anderem die Adresse zum Mail Transfer Agent und die Adresse zum Mail Delivery Agent.
+Diese Programme bzw. die Server, auf denen sie laufen, sind nicht nur in Bezug auf die allgemeine Mailfunktionalität von Bedeutung. Nein, denn dort, auf diesen Servern, unter der Kontrolle des jeweiligen Providers, geht jede einzelne E-Mail, die versendet oder empfangen wird, durch. Das bedeutet, dass dort theoretisch ein Mitschnitt aller Nachrichten gemacht werden kann. Auch macht der Provider, natürlich nur zum Besten seiner Kunden, Backups (Sicherungen) von deren Postfächer. Das mag ja schön und gut sein und ist im Falle eines Datenverlusts äusserst praktsich, aber wer kann sonst noch auf dieses Postfach oder die Backup-Daten zugreifen? Die Systemadministratoren vom Provider? PR-Firmen? Datenanalysten? Geheimdienste? Wer weiss.
 Wie man sehen kann, hat man im Prinzip keine Ahnung, wer alles auf seine E-Mails Zugriff hat.
 
 \subsection{E-Mails verschlüsseln}
-Doch es gibt ein paar Dinge, die man tun kann, um seine E-Mails einigermassen vor ungewollten Blicken zu schützen.
+Doch es gibt ein paar Dinge, die man tun kann, um seine E-Mails besser vor ungewollten Blicken zu schützen.
 So gibt es mehrere Verfahren, um E-Mails zu verschlüsseln. Eines der beliebtesten und wohl meist verbreitetsten hierfür ist PGP (Pretty Good Privacy) oder deren Weiterentwicklung GPG (GNU Privacy Guard).
-Bei beiden handelt es sich um ein Public-Key-Verfahren mit asymmetrischer Verschlüsselung. Bei dieser Art von Verschlüsselung gibt es einen öffentlichen Schlüssel, mit dem jeder Sender Daten für den Empfänger verschlüsseln und signieren kann und einen privaten geheimen Schlüssel, der vom Empfänger benutzt wird, um die Nachricht, die mit seinem öffentlichen Schlüssel verschlüsselt wurde, zu entschlüsseln.
+Bei beiden handelt es sich um ein Public-Key-Verfahren mit asymmetrischer Verschlüsselung. Bei dieser Art von Verschlüsselung gibt es einen öffentlichen Schlüssel, mit dem jeder Sender Daten für den Empfänger verschlüsseln und signieren kann und es gibt einen privaten geheimen Schlüssel, der vom Empfänger benutzt wird, um die Nachricht, die mit seinem öffentlichen Schlüssel verschlüsselt wurde, wieder zu entschlüsseln.
 Solange man seinen privaten Schlüssel geheim hält, ist es für einen ``Angreifer'' sehr schwierig sowie rechen- und zeitinsensiv eine solche verschlüsselte Nachricht zu knacken.
-Es gibt eine Menge Erweiterungen für die gängigsten Mail-Clients, um diese Verschlüsselungsfunktion nachzurüsten. Im Internet findet man viele Anleitungen, die einem zeigen, wie man vorgehen muss und welche Erweiterungen sich empfehlen.
+Es gibt eine Menge Erweiterungen für die gängigsten Mail-Clients, um diese Verschlüsselungsfunktion nachzurüsten. Im Internet findet man viele Anleitungen, die einem zeigen, wie man dazu vorgehen muss und welche Erweiterungen sich empfehlen.
 
 \subsection{Ich als Provider}
 Wenn man plant, seine Mails selbst zu verwalten und komplett auf einen Mail-Provider zu verzichten, muss man sich fragen, was einen Provider ausmacht und welche Aufgaben er hat. 
@@ -66,8 +66,8 @@ Ein Provider muss einen MDA und einen MTA zur Verfügung stellen, damit Mails ve
 \\
 Ausserdem muss er die E-Mail-Adresse des Kunden so konfigurieren, dass die Mails den richtigen Weg nehmen. Jeder Provider hat seine eigene Domain, wie zum Beispiel Google's \textit{gmail.com} oder Swisscom's \textit{bluewin.ch}. Die E-Mail-Adressen der Kunden enden deshalb immer auf jene Domains: \textit{max@gmail.com}, \textit{muster@bluewin.ch}. Als ``Selbstversorger'' braucht man nun ebenfalls eine solche Domain. Dabei muss es sich nicht zwingend um eine Top-Level-Domain handeln \footnote{Link 20, Linkverzeichnis, Wikipedia}. Auch eine kostenlose Domain mit der Endung \textit{.ch.vu} würde genügen.
 \\
-Dieser Domain braucht man dann nur noch einen DNS-Server \footnote{\url{http://de.wikipedia.org/wiki/Domain\_Name\_System}} zuzuweisen, der den MDA kennt.
-Ein Problem gibt es da aber noch. Normale Haushaulte bekommen vom Internetprovider standardmässig keine statische IP-Adresse zugewiesen, was bedeutet, dass diese ständig ändern könnte und so der DNS-Server nicht mehr weiss, wohin er jetzt den Datenverkehr weiterleiten muss. Um dieses Problem zu lösen gibt es zwei Möglichkeiten: Man kann beim Provider eine kostenpflichtige statische IP-Adresse erwerben oder man registriert sich bei einem dynamischen DNS-Anbieter. Dieser stellt eine Schnittstelle zur Verfügung, über die man die IP-Adresse seines Server dem DNS bei jeder Änderung mitteilen kann. Somit ist gegeben, dass der DNS-Server stets die aktuelle IP-Adresse des Servers kennt.
+Dieser Domain braucht man dann nur noch einen DNS-Server \footnote{Link 21, Linkverzeichnis, Wikipedia} zuzuweisen, der den MDA kennt.
+Ein Problem gibt es da aber noch. Normale Haushaulte bekommen vom Internetprovider standardmässig keine statische IP-Adresse zugewiesen, was bedeutet, dass diese ständig ändern kann und so der DNS-Server nicht mehr weiss, wohin er jetzt den Datenverkehr weiterleiten muss. Um dieses Problem zu lösen gibt es zwei Möglichkeiten: Man kann beim Provider eine kostenpflichtige statische IP-Adresse erwerben oder man registriert sich bei einem dynamischen DNS-Anbieter. Dieser stellt eine Schnittstelle zur Verfügung, über die man die IP-Adresse seines Server bei jeder Änderung dem DNS bei mitteilen kann. Somit ist gegeben, dass der DNS-Server stets die aktuelle IP-Adresse des Servers kennt.
 
 \subsubsection{Vor- und Nachteile}
 Natürlich gibt es nicht nur Vorteile wenn man sein eigener E-Mail-Provider ist. Folgende Auflistung soll hier eine Übersicht schaffen. \\ \\
@@ -90,4 +90,4 @@ Natürlich gibt es nicht nur Vorteile wenn man sein eigener E-Mail-Provider ist.
 Seine Mails selbst zu verwalten ist ein schwieriges unterfangen und mit viel Aufwand verbunden. Für Laien ist dies definitiv keine empfehlenswerte Lösung. Die Frage die sich deshalb stellt ist, ob es denn bereits vertrauenswürdige und sichere E-Mail Provider gibt, auf die man stattdessen zurückgreifen kann. \\
 Leider ist es sehr schwierig oder gar unmöglich eine Antwort auf diese Frage zu finden, denn Tatsache ist, dass in der Theorie jeder Provider gehackt werden kann. Die Daten sind beim Provider somit nie hundert Prozent sicher. \\
 Es bleibt einem nichts anderes übrig, als zu vertrauen. Vertrauen in den Provider, dass dieser bestrebt ist, jede mögliche Massnahme zu treffen, um die höchsten Sicherheitsstandards einzuhalten. \\
-Ein Beispiel hierfür ist zum Beispiel \textit{NEOMAILBOX}\footnote{Link 21, Linkverzeichnis, Neomailbox}. Diese Firma stellt einen kostenpflichtigen Service zur Verfügung, der einen schnellen, sicheren und anonymen E-Mail Dienst verspricht. Zudem soll der Service mit einem Top Spam- und Virenfilter ausgestattet sein.\footnote{Link 22, Linkverzeichnis, Neomailbox}
+Ein Beispiel hierfür ist zum Beispiel \textit{NEOMAILBOX}\footnote{Link 21, Linkverzeichnis, Neomailbox}. Diese Firma stellt einen kostenpflichtigen Service zur Verfügung, der einen schnellen, sicheren und anonymen E-Mail-Dienst verspricht. Zudem soll der Service mit einem top Spam- und Virenfilter ausgestattet sein.\footnote{Link 22, Linkverzeichnis, Neomailbox}
