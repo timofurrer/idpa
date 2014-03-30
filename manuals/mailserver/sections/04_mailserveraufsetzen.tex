@@ -79,15 +79,12 @@ Als nächstes müssen alle benötigten Komponenten installiert werden.
 Diese sind:
 \begin{itemize}
 \item MySQL Server \\
-MySQL bezeichnet eine Datenbank. Das zu installierende Paket stellt eine Datenbank für die E-Mail-Benutzer und andere Einstellungen zur Verfügung.
-
+%MySQL bezeichnet eine Datenbank. Das zu installierende Paket stellt eine Datenbank für die E-Mail-Benutzer und andere Einstellungen zur Verfügung.
 % FIXME: Description
 \item Postfix \\
 % FIXME: Description
-
 \item Dovecot \\
 % FIXME: Description
-
 \end{itemize}
 
 Dovecot verlangt ein aktives IPv6-Modul. Dieses muss zur entsprechenden Liste hinzugefügt und anschliessend aktiviert werden:
@@ -237,8 +234,8 @@ virtual_transport = dovecot
 dovecot_destination_recipient_limit = 1
 \end{lstlisting}
 
+\newpage
 In dieser Datei ist auch wichtig, dass der Eintrag \textit{mydestination} nur \textit{localhost} enthält:
-
 \begin{lstlisting}
 mydestination = localhost
 \end{lstlisting}
@@ -422,7 +419,7 @@ Und legt jene dort an:
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.3]{images/pa-domain.png}
+\includegraphics[scale=0.6]{images/pa-domain.png}
 \caption{Postfix admin - Neue Domain}
 \end{figure}
 
@@ -434,6 +431,6 @@ Virtual Liste -> Mailbox hinzufuegen
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.3]{images/pa-mail.png}
+\includegraphics[scale=0.6]{images/pa-mail.png}
 \caption{Postfix admin - Neue Mailbox}
 \end{figure}
