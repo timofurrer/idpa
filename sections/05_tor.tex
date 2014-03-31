@@ -14,7 +14,7 @@ Auch hinter \textit{www.google.ch} steckt eine IP-Adresse und genau so verhält 
 Jeder Dienst lässt sich über seine IP-Adresse ansprechen, sofern diese bekannt ist.
 Da sich Menschen Namen aber deutlich leichter merken können als Abfolgen von Zahlen, hat man das \textit{Domain Name System} (DNS) eingeführt.
 Das DNS ist ein Verzeichnisdienst, der den Namensraum des Internets verwaltet und ist weltweit auf tausende von Servern verteilt.
-Seine Aufgabe besteht darin, sogenannte Domänennamen wie \textit{google.ch} in die zugehörigen IP-Adressen umzuwandeln\footnote{Link 21, Linkverzeichnis, Wikipedia}.
+Seine Aufgabe besteht darin, sogenannte Domänennamen wie \textit{google.ch} in die zugehörigen IP-Adressen umzuwandeln\footnote{Wikipedia: Domain Name System, Linkverzeichnis, Link 21}.
 
 \begin{figure}[H]
 \centering
@@ -56,15 +56,15 @@ Global betrachtet nutzt wohl nur ein kleiner Teil der Leute Tor, da es erstens n
 \subsection{Der zweifelhafte Ruf von Tor}
 Tor hat einen zweifelhaften Ruf, der einen potenziellen Nutzer möglicherweise zwiegespalten zurücklässt.
 Es heisst oft, dass im Tor-Netzwerk auf Grund der Anonymisierung verstärkt illegaler Handel getrieben wird.
-Dies betrifft den Handel mit Drogen, Waffen und auch Kinderpornographie.\footnote{Link 23, Linkverzeichnis, Zeit} \footnote{Link 24, Linkverzeichnis, NZZ}
+Dies betrifft den Handel mit Drogen, Waffen und auch Kinderpornographie.\footnote{Zeit, Linkverzeichnis, Link 30} \footnote{NZZ, Linkverzeichnis, Link 31}
 Möchte man als gewissenhafter Nutzer tatsächlich mit solchen Tätigkeiten in Verbindung gebracht werden?
 Was den zweifelhaften Ruf von Tor noch verstärkt, ist die Finanzierung des Projektes.
 So wird die Weiterentwicklung von Tor bis heute zu grossen Teilen von militärischen Organisationen der USA sowie der US-amerikanischen Regierung  unterstützt.
-\footnote{Link 25, Linkverzeichnis, Wikipedia}
-\footnote{Link 26, Linkverzeichnis, heise}
+\footnote{Wikipedia: Tor Netzwerk, Linkverzeichnis, Link 32}
+\footnote{heise, Linkverzeichnis, Link 33}
 Dies grenzt beinahe schon an Ironie, sind es doch die amerikanischen Geheimdienste, die das Internet im grössten Masse aushorchen. Die Frage, die sich deshalb aufdrängt ist die Folgende: "Kann man überhaupt noch auf die anonyme Funktionsweise von Tor vertrauen oder muss man davon ausgehen, dass amerikanische Geheimdienste das Netzwerk bewusst aufgebaut haben, um jeden abzuhören, der offenbar etwas zu verstecken hat?"
 \\
-Kürzlich ist bekannt geworden, dass die Bemühungen der NSA, Nutzer vom Tor-Netzwerk gezielt zu de-anonymisieren, sehr ineffizient sind.\footnote{Link 27, Linkverzeichnis, heise}
+Kürzlich ist bekannt geworden, dass die Bemühungen der NSA, Nutzer vom Tor-Netzwerk gezielt zu de-anonymisieren, sehr ineffizient sind.\footnote{heise, Linkverzeichnis, Link 34}
 Handelt es sich dabei um eine bewusste Falschmeldung? Oder ist Tor vielleicht doch sicherer als es den Anschein macht? Diese Frage lässt sich leider nicht abschliessend beantworten. Trotzdem sollte nicht ausser Acht gelassen werden, dass die Tor-Software aus vielen Fachkreisen befürwortet wird. Es lohnt sich deshalb, die Funktionsweise von Tor zu analysieren, um mehr Substanz für ein Urteil zu gewinnen.
 
 \subsection{Wie funktioniert Tor?}
@@ -85,11 +85,11 @@ Im Folgenden werden die verschiedenen Stationen bzw. Phasen der Prozedur genauer
 \item Er baut nun eine verschlüsselte Verbindung mit dem ersten Tor-Server (Entry-Guard) der Route auf und sendet ihm die Daten.
 \item Der Entry-Guard verschlüsselt die Daten erneut und sendet diese an einen weiteren Tor-Server.
 \item Dieser tut genau das Gleiche noch einmal, worauf die Daten schliesslich zum letzten Server (Exit-Node) kommen.
-\item Der Exit-Node entschlüsselt die Daten und leitet sie zum gewünschten Ziel weiter. Das ist die einzige Strecke im ganzen Ablauf, auf der die Daten nicht mehr verschlüsselt weitergeleitet werden.\footnote{Link 28, Linkverzeichnis, Tor Project}
-\footnote{Link 29, Linkverzeichnis, Wikipedia}
+\item Der Exit-Node entschlüsselt die Daten und leitet sie zum gewünschten Ziel weiter. Das ist die einzige Strecke im ganzen Ablauf, auf der die Daten nicht mehr verschlüsselt weitergeleitet werden.\footnote{Tor Project, Linkverzeichnis, Link 35}
+\footnote{Wikipedia: Tor Netzwerk, Linkverzeichnis, Link 36}
 \end{enumerate}
 
-Die versendeten Daten werden im Laufe der Kaskade in mehrere Verschlüsselungsschichten verpackt, damit die passierten Tor-Server nicht sehen können, worum es sich dabei handelt. Daher kommt auch der Name der Prozedur. Der finale Aufbau des Pakets gleicht einer Zwiebel mit mehreren Schichten, die  schlussendlich wieder entpackt werden müssen. Diese Aufgabe übernimmt dann der Exit-Node. Generell gilt, dass die Daten immer drei Tor-Server passieren. Da die Tor-Server jeweils nur die Rechner links und rechts von sich kennen, weiss nur der erste Tor-Server über die Identität des Nutzers Bescheid. Der dritte und letzte Tor-Server kennt dann nur noch den Tor-Server, der ihm die Daten weitergeleitet hat, die Daten selbst und das finale Ziel.\footnote{Link 30, Linkverzeichnis, Wikipedia}
+Die versendeten Daten werden im Laufe der Kaskade in mehrere Verschlüsselungsschichten verpackt, damit die passierten Tor-Server nicht sehen können, worum es sich dabei handelt. Daher kommt auch der Name der Prozedur. Der finale Aufbau des Pakets gleicht einer Zwiebel mit mehreren Schichten, die  schlussendlich wieder entpackt werden müssen. Diese Aufgabe übernimmt dann der Exit-Node. Generell gilt, dass die Daten immer drei Tor-Server passieren. Da die Tor-Server jeweils nur die Rechner links und rechts von sich kennen, weiss nur der erste Tor-Server über die Identität des Nutzers Bescheid. Der dritte und letzte Tor-Server kennt dann nur noch den Tor-Server, der ihm die Daten weitergeleitet hat, die Daten selbst und das finale Ziel.\footnote{Wikipedia: Onion Routing, Linkverzeichnis, Link 37}
 Die zufällig gewählte Route wird vom Tor-Client ungefähr alle zehn Minuten gewechselt. So soll eine möglichst hohe Sicherheit gewährleistet werden.
 \\
 \\
@@ -110,7 +110,7 @@ Beim Einsatz von Tor müssen zusätzlich gewisse Regeln beachtet werden, die es 
 \item Tor nur dann benutzen, wenn es auch wirklich Sinn macht
 \end{itemize}
 
-Der letzte Punkt ist sehr wichtig, da die Anonymität durch Protokollierung gebrochen werden kann. Protokolliert ein Tor-Server genügend lang die passierenden Daten, kann nach durchschnittlich sechs Monaten die Identität aufgedeckt werden. Je öfter man den Dienst also braucht, desto mehr Informationen gibt man dem vermeintlichen Schnüffler. Die Zeit bis zum Aufdecken der Identität ist dabei stark von der Infrastruktur abhängig. Staatliche Behörden mit immensen Rechenzentren hätten folglich keine grossen Probleme, die Anonymität von passierenden Nutzern nach kurzer Zeit aufzuheben.\footnote{Link 31, Linkverzeichnis, heise}
+Der letzte Punkt ist sehr wichtig, da die Anonymität durch Protokollierung gebrochen werden kann. Protokolliert ein Tor-Server genügend lang die passierenden Daten, kann nach durchschnittlich sechs Monaten die Identität aufgedeckt werden. Je öfter man den Dienst also braucht, desto mehr Informationen gibt man dem vermeintlichen Schnüffler. Die Zeit bis zum Aufdecken der Identität ist dabei stark von der Infrastruktur abhängig. Staatliche Behörden mit immensen Rechenzentren hätten folglich keine grossen Probleme, die Anonymität von passierenden Nutzern nach kurzer Zeit aufzuheben.\footnote{heise, Linkverzeichnis, Link 38}
 
 \subsection{Vor- und Nachteile}
 Tor hat ganz klare Vorteile aber auch bestimmte Nachteile, die nicht ausser Acht gelassen werden sollten.
