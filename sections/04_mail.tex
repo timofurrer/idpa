@@ -94,3 +94,23 @@ Seine Mails selbst zu verwalten ist ein schwieriges unterfangen und mit viel Auf
 Leider ist es sehr schwierig oder gar unmöglich eine Antwort auf diese Frage zu finden, denn Tatsache ist, dass in der Theorie jeder Provider gehackt werden kann. Die Daten sind beim Provider somit nie hundert Prozent sicher. \\
 Es bleibt einem nichts anderes übrig, als zu vertrauen. Vertrauen in den Provider, dass dieser bestrebt ist, jede mögliche Massnahme zu treffen, um die höchsten Sicherheitsstandards einzuhalten. \\
 Ein Beispiel hierfür ist \textit{NEOMAILBOX}\footnote{\hyperlink{link22}{Neomailbox, Linkverzeichnis, Link 22}}. Diese Firma stellt einen kostenpflichtigen Service zur Verfügung, der einen schnellen, sicheren und anonymen E-Mail-Dienst verspricht. Zudem soll der Service mit einem top Spam- und Virenfilter ausgestattet sein.
+
+\subsection{Experiment}
+
+\subsubsection{Zielsetzung}
+Das Ziel war es, einen Computer aufzusetzen, auf dem ein Mailserver läuft. Der Mailserver soll aus einem Mail Delivery Agent und aus einem Mail Transport Agent bestehen.
+Als Computer kam zu Testzwecken ein Raspberry Pi zum Einsatz. Dabei handelt es sich um einen Einplatinen-Computer. \\
+Sobald man vor hat nur noch den eigenen Mailserver zu benutzen, sollte man einen richtigen Computer als Server in Betracht ziehen. Als Betriebssystem kam das auf GNU/Linux Debian basierende Betriebssystem Raspbian zum Einsatz.
+Alle genutzte Software ist frei Verfügbar und sogar Open Source.
+
+\subsubsection{Installation}
+Das Experiment \textit{Installation eines Mailservers} war das anspruchsvollste der drei Experimenten. Es gibt recht viele Konfigurationsdateien zu bearbeiten, was ein hohes Fehlerrisiko mit sich bringt.
+So haben auch wir im ersten Versuch gescheitert. Zwar war es möglich E-Mail zu verschicken, doch das Empfangen war unmöglich.
+Nach einem kompletten Neustart des Experimentes ist es uns doch gelungen einen funktionierenden Mailserver in Betrieb zu nehmen.
+Selbst das Aufsetzen eines funktionierenden Spamfilters hat am Ende funktioniert. \\ \\
+Der Zugriff per POP3 und IMAP für das Empfangen der Mails ging mit dem Mail Client Thunderbird ohne Probleme. Auch mit dem Mail Client des iPhones war es möglich die Mails zu empfangen. Gleiches gilt auch für das Senden von E-Mails.
+
+\subsubsection{Fazit}
+Einen eigenen Mailserver aufzusetzen, ist nicht für jedermann gedacht. Man muss unbedingt bedenken, dass dies mit recht viel Arbeit verbunden sein kein, vor allem dann, wenn man sich noch nicht so gut mit der Thematik auskennt.
+Erfreulich war, dass das Senden und Empfangen von E-Mails am Ende ohne Probleme funktioniert hat. Auch das installierte Webinterface macht einen guten Eindruck.
+Für Interessierte ist es sicher lohnenswert dieses Projekt in Angriff zu nehmen. Hat man es einmal am laufen, ist man stolz drauf seinen eigenen Mailserver unter Kontrolle zu haben.
