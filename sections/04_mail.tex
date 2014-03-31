@@ -19,9 +19,9 @@ Eine E-Mail passiert von der Erzeugung beim Sender bis zur Abgabe beim Empfänge
 \begin{itemize}
 \item E-Mail-Client: Beim Client handelt es sich um das Mail-Programm, welches E-Mails senden und empfangen kann. Sowohl der Sender als auch der Empfänger sind auf ein solches angewiesen.
 \item Mail Transfer Agent (MTA): Der Mail Transfer Agent ist für den Transport der E-Mail verantwortlich.
-\footnote{Wikipedia: Mail Transport Agent, Linkverzeichnis, Link 16}
+\footnote{\hyperlink{link16}{Wikipedia: Mail Transport Agent, Linkverzeichnis, Link 16}}
 \item Mail Delivery Agent (MDA): Der Mail Delivery Agent hat die Aufgabe, die E-Mail beim Empfänger abzuliefern, sobald diese vom Mail Transfer Agent übermittelt wurde.
-\footnote{Wikipedia: Mail Delivery Agent, Linkverzeichnis, Link 17}
+\footnote{\hyperlink{link17}{Wikipedia: Mail Delivery Agent, Linkverzeichnis, Link 17}}
 \end{itemize}
 
 Bei MTA und MDA handelt es sich jeweils um Computer-Programme, welche typischerweise auf den Servern (Computern) des jeweiligen Providers laufen.
@@ -41,11 +41,11 @@ Je nach verwendetem Protokoll wird dem Empfänger eine Kopie der Mail zugestellt
 \\
 \\
 IMAP (Internet Message Access Protocol) hat den Vorteil, dass man im Falle eines lokalen Datenverlusts das Original des Mails auf dem Server hat. Es eignet sich zudem sehr gut für die parallele Nutzung von mehreren Geräten (Computer, Tablet, Smartphone), da die E-Mails jeweils synchronisiert (abgeglichen) werden.
-\footnote{Wikipedia: POP3, Linkverzeichnis, Link 18}
+\footnote{\hyperlink{link18}{Wikipedia: POP3, Linkverzeichnis, Link 18}}
 \\
 \\
 POP3 (Post Office Protocol 3) bietet diese Möglichkeiten nicht. Es eignet sich aber für Nutzer, die gerne selbst bestimmen, wo ihre E-Mails aufbewahrt werden. Seit den Snowden-Enthüllungen scheint dieses Argument wichtiger denn je.
-\footnote{Wikipedia: IMAP, Linkverzeichnis, Link 19}
+\footnote{\hyperlink{link19}{Wikipedia: IMAP, Linkverzeichnis, Link 19}}
 
 \subsection{Mein Provider und seine Server}
 Der erste Schritt, den man tun muss, um überhaupt eine E-Mail versenden zu können, ist es, sich einen passenden Provider auszusuchen. Ein Provider ist eine Firma, die ihren Kunden eine Mail-Adresse zur Verfügung stellt. Dies kann z.B. Google mit Gmail, Microsoft mit Hotmail oder eine Firma wie GMX sein. Der Provider muss diese E-Mail-Adresse konfigurieren, damit der Kunde sie gebrauchen kann. Zur Konfiguration gehört unter anderem die Adresse zum Mail Transfer Agent und die Adresse zum Mail Delivery Agent.
@@ -63,9 +63,9 @@ Wenn man plant, seine Mails selbst zu verwalten und komplett auf einen Mail-Prov
 \\
 Ein Provider muss einen MDA und einen MTA zur Verfügung stellen, damit Mails versendet und empfangen werden können. Diese müssen am Internet angehängt sein und dauerhaft laufen, damit die E-Mails ihr Ziel auch erreichen.
 \\
-Ausserdem muss er die E-Mail-Adresse des Kunden so konfigurieren, dass die Mails den richtigen Weg nehmen. Jeder Provider hat seine eigene Domain, wie zum Beispiel Google's \textit{gmail.com} oder Swisscom's \textit{bluewin.ch}. Die E-Mail-Adressen der Kunden enden deshalb immer auf jene Domains: \textit{max@gmail.com}, \textit{muster@bluewin.ch}. Als ``Selbstversorger'' braucht man nun ebenfalls eine solche Domain. Dabei muss es sich nicht zwingend um eine Top-Level-Domain handeln \footnote{Wikipedia: Top Level Domain, Linkverzeichnis, Link 20}. Auch eine kostenlose Domain mit der Endung \textit{.ch.vu} würde genügen.
+Ausserdem muss er die E-Mail-Adresse des Kunden so konfigurieren, dass die Mails den richtigen Weg nehmen. Jeder Provider hat seine eigene Domain, wie zum Beispiel Google's \textit{gmail.com} oder Swisscom's \textit{bluewin.ch}. Die E-Mail-Adressen der Kunden enden deshalb immer auf jene Domains: \textit{max@gmail.com}, \textit{muster@bluewin.ch}. Als ``Selbstversorger'' braucht man nun ebenfalls eine solche Domain. Dabei muss es sich nicht zwingend um eine Top-Level-Domain handeln \footnote{\hyperlink{link20}{Wikipedia: Top Level Domain, Linkverzeichnis, Link 20}}. Auch eine kostenlose Domain mit der Endung \textit{.ch.vu} würde genügen.
 \\
-Dieser Domain braucht man dann nur noch einen DNS-Server \footnote{Wikipedia: Domain Name System, Linkverzeichnis, Link 21} zuzuweisen, der den MDA kennt.
+Dieser Domain braucht man dann nur noch einen DNS-Server \footnote{\hyperlink{link21}{Wikipedia: Domain Name System, Linkverzeichnis, Link 21}} zuzuweisen, der den MDA kennt.
 Ein Problem gibt es da aber noch. Normale Haushaulte bekommen vom Internetprovider standardmässig keine statische IP-Adresse zugewiesen, was bedeutet, dass diese ständig ändern kann und so der DNS-Server nicht mehr weiss, wohin er jetzt den Datenverkehr weiterleiten muss. Um dieses Problem zu lösen gibt es zwei Möglichkeiten: Man kann beim Provider eine kostenpflichtige statische IP-Adresse erwerben oder man registriert sich bei einem dynamischen DNS-Anbieter. Dieser stellt eine Schnittstelle zur Verfügung, über die man die IP-Adresse seines Server bei jeder Änderung dem DNS-Server mitteilen kann. Somit kennt der DNS-Server stets die aktuelle IP-Adresse des Servers.
 \\
 \\
@@ -93,4 +93,4 @@ Natürlich gibt es nicht nur Vorteile, wenn man sein eigener E-Mail-Provider ist
 Seine Mails selbst zu verwalten ist ein schwieriges unterfangen und mit viel Aufwand verbunden. Für Laien ist dies definitiv keine empfehlenswerte Lösung. Die Frage, die sich deshalb stellt ist, ob es denn bereits vertrauenswürdige und sichere E-Mail Provider gibt, auf die man stattdessen zurückgreifen kann. \\
 Leider ist es sehr schwierig oder gar unmöglich eine Antwort auf diese Frage zu finden, denn Tatsache ist, dass in der Theorie jeder Provider gehackt werden kann. Die Daten sind beim Provider somit nie hundert Prozent sicher. \\
 Es bleibt einem nichts anderes übrig, als zu vertrauen. Vertrauen in den Provider, dass dieser bestrebt ist, jede mögliche Massnahme zu treffen, um die höchsten Sicherheitsstandards einzuhalten. \\
-Ein Beispiel hierfür ist \textit{NEOMAILBOX}\footnote{Neomailbox, Linkverzeichnis, Link 22}. Diese Firma stellt einen kostenpflichtigen Service zur Verfügung, der einen schnellen, sicheren und anonymen E-Mail-Dienst verspricht. Zudem soll der Service mit einem top Spam- und Virenfilter ausgestattet sein.
+Ein Beispiel hierfür ist \textit{NEOMAILBOX}\footnote{\hyperlink{link22}{Neomailbox, Linkverzeichnis, Link 22}}. Diese Firma stellt einen kostenpflichtigen Service zur Verfügung, der einen schnellen, sicheren und anonymen E-Mail-Dienst verspricht. Zudem soll der Service mit einem top Spam- und Virenfilter ausgestattet sein.
